@@ -12,7 +12,6 @@ namespace eCommerceStarterCode.Models
         public string Description { get; set; }
 
         [ForeignKey("Product")]
-
         public int ProductId { get; set; }
         public Product Procuct { get; set; }
     }

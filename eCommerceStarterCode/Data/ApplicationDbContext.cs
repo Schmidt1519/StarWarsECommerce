@@ -8,13 +8,15 @@ namespace eCommerceStarterCode.Data
     public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions options)
-            :base(options)
+            : base(options)
         {
 
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<Category> Categories {get; set;}
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
