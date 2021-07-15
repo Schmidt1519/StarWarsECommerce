@@ -25,5 +25,14 @@ namespace eCommerceStarterCode.Controllers
             var shoppingCart = _context.ShoppingCarts.Find(id);
             return Ok(shoppingCart);
         }
+
+        [HttpDelete("remove/{id:int}")]
+        public IActionResult DeleteFromCart(int id)
+        {
+            var cart = _context.ShoppingCarts.Find(id);
+            _context.ShoppingCarts.Remove(cart);
+            _context.SaveChanges();
+            return Ok();
+        }
     }
 }
