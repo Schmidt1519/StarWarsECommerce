@@ -12,10 +12,12 @@ namespace eCommerceStarterCode.Controllers
     public class ShoppingCartController : ControllerBase
     {
         private ApplicationDbContext _context;
+
         public ShoppingCartController(ApplicationDbContext context)
         {
             _context = context;
         }
+
         // GET Shopping Cart
         [HttpGet("{id:int}")]
         public IActionResult GetShoppingCart(int id)

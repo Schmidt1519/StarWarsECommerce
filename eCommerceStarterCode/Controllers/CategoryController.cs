@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 namespace eCommerceStarterCode.Controllers
 {
     [Route("api/category")]
@@ -12,12 +13,15 @@ namespace eCommerceStarterCode.Controllers
     public class CategoryController : ControllerBase
     {
         private ApplicationDbContext _context;
+
         public CategoryController(ApplicationDbContext context)
         {
             _context = context;
         }
+
         // GET Categories
         [HttpGet("{id:int}")]
+
         public IActionResult GetCategory(int id)
         {
             var category = _context.Categories.Find(id);
@@ -43,5 +47,6 @@ namespace eCommerceStarterCode.Controllers
             _context.SaveChanges();
             return StatusCode(201, value);
         }
+
     }
 }
