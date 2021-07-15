@@ -6,14 +6,8 @@ namespace eCommerceStarterCode.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Reviews");
 
-            migrationBuilder.DropTable(
-                name: "ShoppingCarts");
-
-            migrationBuilder.DropTable(
-                name: "Products");
+            
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",

@@ -1,6 +1,7 @@
 ﻿using eCommerceStarterCode.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,13 +24,20 @@ namespace eCommerceStarterCode.Controllers
 
         public IActionResult GetReviews(int id)
         {
-            // Retrieve reviews from database
-            var review = _context.Reviews.Find(id);
-            if (review == null)
-            {
-                return NotFound();
-            }
-            return Ok(review);
+        var review = _context.Reviews.Find(id);
+        if (review == null)
+        {
+            return NotFound();
+        }
+        return Ok(review);
+        }
+
+        [HttpPost("create")]
+        public IActionResult PostUserrEVIEW([FromBody] Models.Review value)
+        {
+            _context.Reviews.Add(value);
+            _context.SaveChanges();
+            return StatusCode(201, value);
         }
     }
 }
