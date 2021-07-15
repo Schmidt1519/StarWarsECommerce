@@ -1,4 +1,5 @@
 ﻿using eCommerceStarterCode.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,11 +11,11 @@ namespace eCommerceStarterCode.Controllers
 {
     [Route("api/products")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductController : ControllerBase
     {
         private ApplicationDbContext _context;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -37,6 +38,14 @@ namespace eCommerceStarterCode.Controllers
             // Retrieve product by ID from database
             var productById = _context.Products.Find(id);
             return Ok(productById);
+        }
+
+        [HttpPost]
+        public IActionResult PostProduct([FromBody] Models.Product value)
+        {
+            _context.Products.Add(value);
+            _context.SaveChanges();
+            return StatusCode(201, value);
         }
     }
 }

@@ -24,8 +24,12 @@ namespace eCommerceStarterCode.Controllers
         public IActionResult GetReviews(int id)
         {
             // Retrieve reviews from database
-            var reviewsId = _context.Reviews.Find(id);
-            return Ok(reviewsId);
+            var review = _context.Reviews.Find(id);
+            if (review == null)
+            {
+                return NotFound();
+            }
+            return Ok(review);
         }
     }
 }

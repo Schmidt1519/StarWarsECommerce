@@ -8,24 +8,24 @@ using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Controllers
 {
-    [Route("api/cart")]
+    [Route("api/category")]
     [ApiController]
-    public class ShoppingCartController : ControllerBase
+    public class CategoryController : ControllerBase
     {
         private ApplicationDbContext _context;
 
-        public ShoppingCartController(ApplicationDbContext context)
+        public CategoryController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET Shopping Cart
+        // GET Categories
         [HttpGet("{id:int}")]
 
-        public IActionResult GetShoppingCart( int id)
+        public IActionResult GetCategory(int id)
         {
-            var shoppingCart = _context.ShoppingCarts.Find(id);
-            return Ok(shoppingCart);
+            var category = _context.Categories.Find(id);
+            return Ok(category);
         }
     }
 }
