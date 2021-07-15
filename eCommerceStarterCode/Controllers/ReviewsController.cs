@@ -31,5 +31,13 @@ namespace eCommerceStarterCode.Controllers
         }
         return Ok(review);
         }
+
+        [HttpPost("create")]
+        public IActionResult PostUserrEVIEW([FromBody] Models.Review value)
+        {
+            _context.Reviews.Add(value);
+            _context.SaveChanges();
+            return StatusCode(201, value);
+        }
     }
 }
