@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerceStarterCode.Data;
 
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210715013029_run")]
+    partial class run
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "21a92f08-a1c5-4a56-a064-8b6d7c63e04b",
-                            ConcurrencyStamp = "500c03f2-eba4-46ed-94dc-01756d122c2a",
+                            Id = "9adda80a-e831-4445-901f-5f47f7b6b962",
+                            ConcurrencyStamp = "668117e7-bacb-4094-a04c-9bee040de96a",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "401c9478-24e3-4fad-840a-ba425e01ea6d",
-                            ConcurrencyStamp = "319675a5-6b9c-4ebf-ac34-de32a1dfc150",
+                            Id = "ff0fc6bc-6d72-4b78-bb1a-a4342c7798cf",
+                            ConcurrencyStamp = "51869080-4a5c-4f3c-93d6-579611940cad",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -210,9 +212,9 @@ namespace eCommerceStarterCode.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("eCommerceStarterCode.Models.Review", b =>
+            modelBuilder.Entity("eCommerceStarterCode.Models.Reviews", b =>
                 {
-                    b.Property<int>("ReviewId")
+                    b.Property<int>("ReviewsId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -223,7 +225,7 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.HasKey("ReviewId");
+                    b.HasKey("ReviewsId");
 
                     b.HasIndex("ProductId");
 
@@ -388,7 +390,7 @@ namespace eCommerceStarterCode.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("eCommerceStarterCode.Models.Review", b =>
+            modelBuilder.Entity("eCommerceStarterCode.Models.Reviews", b =>
                 {
                     b.HasOne("eCommerceStarterCode.Models.Product", "Procuct")
                         .WithMany()

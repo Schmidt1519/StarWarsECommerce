@@ -13,7 +13,7 @@ namespace eCommerceStarterCode.Data
 
         }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Reviews> Reviews { get; set; }
+        public DbSet<Review> Reviews { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Category> Categories {get; set;}
 
