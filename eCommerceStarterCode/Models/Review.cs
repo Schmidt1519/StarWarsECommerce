@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Models
 {
-    public class Reviews
+    public class Review
     {
-        public int ReviewsId { get; set; }
+        public int ReviewId { get; set; }
         public string Description { get; set; }
 
         [ForeignKey("Product")]
