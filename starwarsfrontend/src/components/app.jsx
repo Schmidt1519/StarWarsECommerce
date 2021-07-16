@@ -11,6 +11,7 @@ export class App extends Component {
         this.state = { 
             token: [],
             user: [],
+            visible: false,
         };
     }
 
@@ -43,17 +44,27 @@ export class App extends Component {
           });
         }
       };
+
+      showForm = () => {
+        this.setState({
+          visible: !this.state.visible,
+        });
+      };
     
     render() {
         return (
             <div>
-                <div>
                 <h1>STAR WARS</h1>
-                <Link to='/register'><button>Register</button></Link>
+                <div>
+                <button onClick={() => {
+                    this.showForm();
+                }}>Register</button>
+                {this.state.visible? (
+                    <Registration register={this.register}/>
+                ):null}
                 </div>
                 <Switch>
                     <Route path='/' render={props => <Login {...props} login={this.login}/>}/>
-                    <Route path='/register' render={props => <Registration {...props} register={this.register}/>}/>
                 </Switch>
             </div>  
         );
