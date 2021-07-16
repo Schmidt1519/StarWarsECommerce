@@ -18,8 +18,8 @@ namespace eCommerceStarterCode.Controllers
             _context = context;
         }
 
-        // GET Shopping Cart
-        [HttpGet("{id:int}")]
+        //GET Shopping Cart
+       [HttpGet("{id:int}")]
         public IActionResult GetShoppingCart(int id)
         {
             var shoppingCart = _context.ShoppingCarts.Find(id);
@@ -32,6 +32,7 @@ namespace eCommerceStarterCode.Controllers
             var cart = _context.ShoppingCarts.Find(id);
             _context.ShoppingCarts.Remove(cart);
             _context.SaveChanges();
+
             return Ok();
         }
     }
