@@ -11,6 +11,7 @@ export class App extends Component {
         this.state = { 
             token: [],
             user: [],
+            visible: false,
         };
     }
 
@@ -23,7 +24,7 @@ export class App extends Component {
     }
 
     register = async (user) => {
-        let response = await axios.post("http://127.0.0.1:8000/api/authentication", user);
+        let response = await axios.post("https://localhost:44394/api/authentication", user);
         if (response === undefined) {
           this.setState({});
         } else {
@@ -34,7 +35,7 @@ export class App extends Component {
     };
 
     login = async (login) => {
-        let response = await axios.post("http://127.0.0.1:8000/api/authentication/login", login);
+        let response = await axios.post("https://localhost:44394/api/authentication/login", login);
         if (response === undefined) {
           this.setState({});
         } else {
@@ -43,17 +44,27 @@ export class App extends Component {
           });
         }
       };
+
+      showForm = () => {
+        this.setState({
+          visible: !this.state.visible,
+        });
+      };
     
     render() {
         return (
             <div>
-                <div>
                 <h1>STAR WARS</h1>
-                <Link to='/register'><button>Register</button></Link>
+                <div>
+                <button onClick={() => {
+                    this.showForm();
+                }}>Register</button>
+                {this.state.visible? (
+                    <Registration register={this.register}/>
+                ):null}
                 </div>
                 <Switch>
                     <Route path='/' render={props => <Login {...props} login={this.login}/>}/>
-                    <Route path='/register' render={props => <RegisterPage {...props} register={this.register}/>}/>
                 </Switch>
             </div>  
         );
