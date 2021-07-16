@@ -4,12 +4,12 @@ class Registration extends Component {
     constructor(props){
         super(props);
         this.state = {
-            firstname: " ",
-            lastname: " ",
-            username: " ",
-            password: " ",
-            email: " ",
-            phonenumber: " ",
+            firstname: "",
+            lastname: "",
+            username: "",
+            password: "",
+            email: "",
+            phonenumber: "",
         }
     }
 
@@ -32,12 +32,12 @@ class Registration extends Component {
         }
         this.props.register(user);
         this.setState({
-            firstname: " ",
-            lastname: " ",
-            username: " ",
-            password: " ",
-            email: " ",
-            phonenumber: " ",
+            firstname: "",
+            lastname: "",
+            username: "",
+            password: "",
+            email: "",
+            phonenumber: "",
         });
     }
 

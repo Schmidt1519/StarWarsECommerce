@@ -30,6 +30,9 @@ namespace eCommerceStarterCode.Controllers
 
             var user = _mapper.Map<User>(userForRegistration);
 
+            user.NormalizedEmail = userForRegistration.Email.ToUpper();
+            user.NormalizedUserName = userForRegistration.UserName.ToUpper();
+
             var result = await _userManager.CreateAsync(user, userForRegistration.Password);
             if (!result.Succeeded)
             {
