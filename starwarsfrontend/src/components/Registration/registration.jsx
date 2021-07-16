@@ -46,7 +46,7 @@ class Registration extends Component {
             <div>
                 <form onSubmit ={this.handleSubmit}>
                     <label>First Name:  </label>
-                    <input type='text' name='firstname' onChange={this.handleChange} value={this.state.username}/>
+                    <input type='text' name='firstname' onChange={this.handleChange} value={this.state.firstname}/>
                     <label>Last Name:  </label>
                     <input type='text' name='lastname' onChange={this.handleChange} value={this.state.lastname}/>
                     <label>Username:  </label>
