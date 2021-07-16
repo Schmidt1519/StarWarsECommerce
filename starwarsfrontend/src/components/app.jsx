@@ -53,7 +53,7 @@ export class App extends Component {
                 </div>
                 <Switch>
                     <Route path='/' render={props => <Login {...props} login={this.login}/>}/>
-                    <Route path='/register' render={props => <Registration {...props} register={this.register}/>}/>
+                    <Route path='/register' render={props => <RegisterPage {...props} register={this.register}/>}/>
                 </Switch>
             </div>  
         );
