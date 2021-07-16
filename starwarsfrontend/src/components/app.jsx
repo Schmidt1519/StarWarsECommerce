@@ -7,7 +7,7 @@ import Login from "./Login/login";
 export class App extends Component {
     constructor(props){
         super(props)
-        state = { 
+        this.state = { 
             token: [],
             user: [],
         };
