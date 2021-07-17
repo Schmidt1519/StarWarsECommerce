@@ -1,6 +1,7 @@
 ﻿using eCommerceStarterCode.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,5 +36,24 @@ namespace eCommerceStarterCode.Controllers
 
             return Ok();
         }
+
+        [HttpPost]
+        public IActionResult PostProduct([FromBody] Models.ShoppingCart value)
+        {
+            _context.ShoppingCarts.Add(value);
+            _context.SaveChanges();
+            return StatusCode(201, value);
+        }
+
+        //[HttpPatch("add/{id:int}")]
+
+        //public IActionResult AddQuantity(int id)
+        //{
+        //    var cart = _context.ShoppingCarts.Find(id);
+        //    var add = cart.Quantity += 1;
+        //    _context.SaveChanges();
+
+        //    return Ok(cart);
+        //}
     }
 }

@@ -1,21 +1,24 @@
 import React, { Component} from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import homepage from "../HomePage/homepage";
+import ShoppingCart from "../ShoppingCart/shoppingCart";
 
 function ProductTable(props) {
-    if (props.products.productTable === undefined) {
+    if (props.products === undefined) {
         console.log(props);
         return (
             null
         );
     } else {
-        let products = props.product.productTable.map((product) => {
+        let products = props.products.map((product) => {
             return <tr key={product.id}>
             <td>{product.name}</td>
                 <td>{product.description}</td>
                 <td>{product.price}</td>
                 <td>{product.rating}</td>
-                <td>{product.category}</td>
+                <td>{product.categoryId}</td>
+                <ShoppingCart productid={product.id} userid={props.user.id}/>
             </tr>
         })
         return (

@@ -1,0 +1,47 @@
+import React, {Component} from 'react';
+
+class ShoppingCart extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            productsid: '',
+            userid: '',
+            quantity: 0,
+        }
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const cart = {
+            productsid: this.props.productsid,
+            userid: this.props.userid,
+            quantity: this.state.quantity,
+        }
+        
+        this.props.createCart(cart);
+        this.setState({
+            productsid: '',
+            userid: '',
+            quantity: 0,
+        });
+    }
+
+    render(){
+        return(
+            <div>
+                <form onSubmit ={this.handleSubmit}>
+                    <label>Quantity:  </label>
+                    <input type='text' name='quantity' onChange={this.handleChange} value={this.state.quantity}/>
+                    <input type='submit' value='Add'/>
+                </form>
+            </div>
+        );
+    }
+}
+export default ShoppingCart;

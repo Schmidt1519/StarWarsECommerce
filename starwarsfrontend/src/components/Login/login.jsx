@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-
 class Login extends Component {
     constructor(props){
         super(props);
@@ -22,6 +21,7 @@ class Login extends Component {
             username: this.state.username,
             password: this.state.password,
         }
+        
         this.props.login(login);
         this.setState({
             username: '',

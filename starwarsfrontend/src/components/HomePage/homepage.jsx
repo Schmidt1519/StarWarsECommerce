@@ -9,7 +9,7 @@ function HomePage(props) {
 
             </div>
             <div className="productTable">
-                 <ProductTable products={props.products}/>
+                 <ProductTable products={props.products} user={props.user}/>
             </div>
         </React.Fragment>
     )
