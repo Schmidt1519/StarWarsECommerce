@@ -45,7 +45,6 @@ export class App extends Component {
     };
 
     login = async (login) => {
-        console.log(user);
         let response = await axios.post('https://localhost:44394/api/authentication/login/', login);
         if (response === undefined) {
           this.setState({});
@@ -54,13 +53,15 @@ export class App extends Component {
             token: response.data,
             loggedIn: !this.state.loggedIn,
           });
-          console.log(this.state.token)
+          console.log(this.state.token.token);
+          console.log(this.state.currentUser);
         }
       };
 
       getCurrentUser = async () => {
-        console.log(user);
-        let response = await axios.get('https://localhost:44394/api/examples/user/');
+        const jwt = localStorage.getItem('token');
+        console.log(jwt);
+        let response = await axios.get('https://localhost:44394/api/examples/user/', {headers: {Authorization: 'Bearer ' + this.state.token.token}});
         if (response === undefined) {
           this.setState({});
         } else {
@@ -121,7 +122,7 @@ export class App extends Component {
                           <Login {...props} login={this.login} currentUser={this.getCurrentUser}/>
                         </div>
                         )} else{
-                        return <HomePage {...props} products={this.state.productTable} user={this.state.user} />
+                        return <HomePage {...props} products={this.state.productTable} user={this.state.currentUser} />
                       }
                     }}/>
                 </Switch>
