@@ -3,6 +3,7 @@ import {withRouter} from "react-router-dom";
 import ProductTable from "../ProductTable/productTable";
 
 function HomePage(props) {
+
     return (
         <React.Fragment>
             <div className="navbar">

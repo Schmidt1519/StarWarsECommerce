@@ -33,6 +33,7 @@ export class App extends Component {
     register = async (registeredUser) => {
         console.log(registeredUser);
         let response = await axios.post('https://localhost:44394/api/authentication/', registeredUser);
+        console.log(response.data);
         if (response === undefined) {
           this.setState({});
         } else {
