@@ -19,11 +19,12 @@ function ProductTable(props) {
                 <td>{product.price}</td>
                 <td>{product.rating}</td>
                 <td>{product.categoryId}</td>
-                <ShoppingCart productid={product.id} userid={props.user}/>
+                <ShoppingCart productid={product.productId} userid={props.user.id} createCart={props.createCart}/>
             </tr>
         })
         return (
             <div>
+                <h1>Welcome {props.user.username}!</h1>
                 <Table className="productTable">
                     <thead>
                         <tr>

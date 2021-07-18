@@ -9,7 +9,7 @@ import HomePage from "./HomePage/homepage";
 export class App extends Component {
     constructor(props){
         super(props)
-        this.state = { 
+        this.state = {
             token: [],
             user: [],
             currentUser: [],
@@ -22,11 +22,10 @@ export class App extends Component {
     }
 
     componentDidMount(){
-        this.productTable();
+      
         const jwt = localStorage.getItem('token');
         try{
-            const user = jwtDecode(jwt);
-            this.setState({user});
+            this.setState({user: jwtDecode(jwt)});
         }catch {}
     }
 
@@ -53,15 +52,15 @@ export class App extends Component {
             token: response.data,
             loggedIn: !this.state.loggedIn,
           });
+          localStorage.setItem('token', this.state.token.token);
           console.log(this.state.token.token);
-          console.log(this.state.currentUser);
+          console.log(this.state.user);
+          this.productTable();
         }
       };
 
       getCurrentUser = async () => {
-        const jwt = localStorage.getItem('token');
-        console.log(jwt);
-        let response = await axios.get('https://localhost:44394/api/examples/user/', {headers: {Authorization: 'Bearer ' + this.state.token.token}});
+        let response = await axios.get('https://localhost:44394/api/examples/user/', {headers: {Authorization: 'Bearer ' + this.state.jwt}});
         if (response === undefined) {
           this.setState({});
         } else {
@@ -85,14 +84,14 @@ export class App extends Component {
     }
 
     createCart = async (cart) => {
-        try{
-            let response = await axios.post('https://localhost:44394/api/cart', cart)
+      let response = await axios.post('https://localhost:44394/api/cart', cart);
+      if (response === undefined){
             this.setState({
-                cart: response.data
             });
-        }
-        catch(err) {
-            console.log(err);
+        }else{
+          this.setState({
+            cart: response.data
+        });
         }
     }
 
@@ -107,8 +106,8 @@ export class App extends Component {
             <div>
                 <h1>STAR WARS</h1>
                 <Switch>
-                    <Route path='/homePage' render={props =>{
-                      if(this.state.loggedIn == false){
+                    <Route path='/' render={props =>{
+                      if(this.state.loggedIn === false){
                         return (
                         <div>
                           <div>
@@ -122,7 +121,7 @@ export class App extends Component {
                           <Login {...props} login={this.login} currentUser={this.getCurrentUser}/>
                         </div>
                         )} else{
-                        return <HomePage {...props} products={this.state.productTable} user={this.state.currentUser} />
+                        return <HomePage {...props} products={this.state.productTable} user={this.state.user} createCart={this.createCart} />
                       }
                     }}/>
                 </Switch>
