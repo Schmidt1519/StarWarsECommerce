@@ -26,7 +26,7 @@ export class App extends Component {
 
     componentDidMount(){
       this.getUserCart(3);
-      // this.getCartProducts(2);
+      this.getCartProducts(2);
         const jwt = localStorage.getItem('token');
         try{
             this.setState({user: jwtDecode(jwt)});
@@ -63,17 +63,17 @@ export class App extends Component {
         }
       };
 
-      getCurrentUser = async () => {
-        let response = await axios.get('https://localhost:44394/api/examples/user/', {headers: {Authorization: 'Bearer ' + this.state.token.token}});
-        if (response === undefined) {
-          this.setState({});
-        } else {
-          this.setState({
-            user: response.data,
-          });
-          console.log(this.state.user)
-        }
-      };
+    getCurrentUser = async () => {
+      let response = await axios.get('https://localhost:44394/api/examples/user/', {headers: {Authorization: 'Bearer ' + this.state.token.token}});
+      if (response === undefined) {
+        this.setState({});
+      } else {
+        this.setState({
+          user: response.data,
+        });
+        console.log(this.state.user)
+      }
+    };
 
     productTable = async () => {
         let response = await axios.get('https://localhost:44394/api/products/products/');
@@ -97,7 +97,7 @@ export class App extends Component {
           });
           // console.log(this.state.cartProducts);
       }
-  };
+    };
 
     createCart = async (cart) => {
       let response = await axios.post('https://localhost:44394/api/cart', cart);
@@ -129,41 +129,41 @@ export class App extends Component {
         });
       };
 
-      showCart = () => {
-        this.setState({
-          cartVisible: !this.state.cartVisible,
-        });
-      };
+    showCart = () => {
+      this.setState({
+        cartVisible: !this.state.cartVisible,
+      });
+    };
 
-      render() {
-        return (
-            <div>
-              <h1>STAR WARS</h1>
-              <Switch>
-                <Route path='/' render={props =>{
-                  if(this.state.loggedIn === false){
-                    return (
-                    <div>
-                      <div>
-                        <button onClick={() => {
-                          this.showForm();
-                        }}>Register</button>
-                          {this.state.visible? (
-                          <Registration register={this.register}/>
-                        ):null}
-                      </div>
-                      <Login {...props} login={this.login} currentUser={this.getCurrentUser}/>
-                    </div>
-                    )} else{
-                    return <HomePage {...props} products={this.state.productTable} 
-                    user={this.state.user} createCart={this.createCart} getUserCart={this.getUserCart}
-                    showCart={this.showCart} cartVisible={this.state.cartVisible}userCart={this.state.userCart}
-                    getCartProducts={this.getCartProducts} cartProducts={this.state.cartProducts}/>
-                  }
-                }}/>
-              </Switch>
-            </div>  
-        );
+    render() {
+      return (
+        <div>
+          <h1>STAR WARS</h1>
+          <Switch>
+            <Route path='/' render={props =>{
+              if(this.state.loggedIn === false){
+                return (
+                <div>
+                  <div>
+                    <button onClick={() => {
+                      this.showForm();
+                    }}>Register</button>
+                      {this.state.visible? (
+                      <Registration register={this.register}/>
+                    ):null}
+                  </div>
+                  <Login {...props} login={this.login} currentUser={this.getCurrentUser}/>
+                </div>
+                )} else{
+                return <HomePage {...props} products={this.state.productTable} 
+                user={this.state.user} createCart={this.createCart} getUserCart={this.getUserCart}
+                showCart={this.showCart} cartVisible={this.state.cartVisible}userCart={this.state.userCart}
+                getCartProducts={this.getCartProducts} cartProducts={this.state.cartProducts}/>
+              }
+            }}/>
+          </Switch>
+        </div>  
+      );
     }
 }
 
