@@ -16,6 +16,7 @@ export class App extends Component {
           currentUser: [],
           registeredUser: [],
           productTable: [],
+          categories: [],
           cartProducts: [],
           products: [],
           visible: false,
@@ -29,14 +30,14 @@ export class App extends Component {
     }
 
     componentDidMount(){
-      this.getUserCart(1);
-      // this.getCartProducts(2);
+      this.getAllCarts();
         const jwt = localStorage.getItem('token');
         try{
             this.setState({user: jwtDecode(jwt)});
         }catch {}
     }
 
+// USER FUNCTIONS
     register = async (registeredUser) => {
         console.log(registeredUser);
         let response = await axios.post('https://localhost:44394/api/authentication/', registeredUser);
@@ -52,6 +53,7 @@ export class App extends Component {
     };
 
     login = async (login) => {
+
         let response = await axios.post('https://localhost:44394/api/authentication/login/', login);
         if (response === undefined) {
           this.setState({});
@@ -68,7 +70,8 @@ export class App extends Component {
       };
 
       getCurrentUser = async () => {
-        let response = await axios.get('https://localhost:44394/api/examples/user/', {headers: {Authorization: 'Bearer ' + this.state.token.token}});
+        const jwt = localStorage.getItem('token');
+        let response = await axios.get('https://localhost:44394/api/examples/user/', {headers: {Authorization: 'Bearer ' + jwt}});
         if (response === undefined) {
           this.setState({});
         } else {
@@ -79,6 +82,7 @@ export class App extends Component {
         }
       };
 
+// PRODUCTS FUNCTIONS
     productTable = async () => {
         let response = await axios.get('https://localhost:44394/api/products/products/');
         if (response === undefined) {
@@ -91,6 +95,31 @@ export class App extends Component {
         }
     };
 
+    getAllCategories = async () => {
+      let response = await axios.get('https://localhost:44394/api/category/categories/');
+      if (response === undefined) {
+          this.setState({});
+      } else {
+          this.setState({
+              categories: response.data
+          });
+          console.log(this.state.categories);
+      }
+    };
+
+    filterProductTable = (searchQuery) => {
+      console.log(this.state.productTable);
+      const productFilter = this.state.productTable.filter(prod => 
+        prod.name.includes(searchQuery) 
+        //prod.categoryId.includes(searchQuery) 
+      )
+      console.log(productFilter);
+      this.setState({
+        productTable: productFilter
+      })
+    }
+
+// SHOPPING CART FUNCTIONS
     getCartProducts = async (id) => {
       let response = await axios.get(`https://localhost:44394/api/products/${id}`);
       if (response === undefined) {
@@ -106,6 +135,18 @@ export class App extends Component {
 
     createCart = async (cart) => {
       let response = await axios.post('https://localhost:44394/api/cart', cart);
+      if (response === undefined){
+            this.setState({
+            });
+        }else{
+          this.setState({
+            cart: response.data
+        });
+        }
+    }
+
+    updateCart = async (id, cart) => {
+      let response = await axios.post(`https://localhost:44394/api/cart/update/${id}`, cart);
       if (response === undefined){
             this.setState({
             });
@@ -134,6 +175,7 @@ export class App extends Component {
         this.getProducts();
       }
     }
+
     filterCart = () => {
       let filtered = this.state.allCarts.filter(cart => cart.userId.includes(this.state.user.id))
     //console.log(this.state.userid);  // test
@@ -193,10 +235,11 @@ export class App extends Component {
                       <Login {...props} login={this.login} currentUser={this.getCurrentUser}/>
                     </div>
                     )} else{
-                    return <HomePage {...props} products={this.state.productTable} 
-                    user={this.state.user} createCart={this.createCart} getUserCart={this.getUserCart}
-                    showCart={this.showCart} cartVisible={this.state.cartVisible} userProducts={this.state.products}
-                    getCartProducts={this.getCartProducts} cartProducts={this.state.cartProducts}/>
+                      return <HomePage {...props} products={this.state.productTable} 
+                      user={this.state.user} createCart={this.createCart} showCart={this.showCart}
+                       cartVisible={this.state.cartVisible} userProducts={this.state.products}
+                      getCartProducts={this.getCartProducts} cartProducts={this.state.cartProducts}
+                      filterCart={this.state.filterCart} filterProductTable={this.filterProductTable}/>
                   }
                 }}/>
               </Switch>

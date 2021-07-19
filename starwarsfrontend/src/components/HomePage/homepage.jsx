@@ -3,6 +3,7 @@ import {withRouter} from "react-router-dom";
 import ProductTable from "../ProductTable/productTable";
 import ViewCart from "../ShoppingCart/viewCart";
 import NavbarHome from "../Navbar/navbar"
+import SearchBar from "../SearchBar/searchBar";
 
 function HomePage(props) {
     console.log(props)
@@ -10,15 +11,18 @@ function HomePage(props) {
         <React.Fragment>
             <div>
             <NavbarHome />
-            <h1>Welcome {props.user.username}!</h1>
-            
+            <h1>Welcome {props.user.userName}!</h1>
+            </div>
+            <div>
+                <SearchBar filterProductTable={props.filterProductTable}/>
             </div>
             <div>
                 <button onClick={() => {
                     props.showCart();
                 }}>View Cart</button>
                 {props.cartVisible?(
-                    <ViewCart userProducts={props.userProducts} getCartProducts={props.getCartProducts} cartProducts={props.cartProducts}/>
+                    <ViewCart userProducts={props.userProducts} getCartProducts={props.getCartProducts} 
+                    cartProducts={props.cartProducts} filterCart={props.filterCart}/>
                 ):null}
             </div>
             <div className="productTable">
