@@ -15,6 +15,7 @@ export class App extends Component {
             currentUser: [],
             registeredUser: [],
             productTable: [],
+            cartProducts: [],
             visible: false,
             loggedIn: false,
             cart: [],
@@ -25,6 +26,7 @@ export class App extends Component {
 
     componentDidMount(){
       this.getUserCart(3);
+      // this.getCartProducts(2);
         const jwt = localStorage.getItem('token');
         try{
             this.setState({user: jwtDecode(jwt)});
@@ -83,7 +85,19 @@ export class App extends Component {
             });
             console.log(this.state.productTable);
         }
-    }
+    };
+
+    getCartProducts = async (id) => {
+      let response = await axios.get(`https://localhost:44394/api/products/${id}`);
+      if (response === undefined) {
+          this.setState({});
+      } else {
+          this.setState({
+            cartProducts: response.data
+          });
+          // console.log(this.state.cartProducts);
+      }
+  };
 
     createCart = async (cart) => {
       let response = await axios.post('https://localhost:44394/api/cart', cart);
@@ -143,7 +157,8 @@ export class App extends Component {
                     )} else{
                     return <HomePage {...props} products={this.state.productTable} 
                     user={this.state.user} createCart={this.createCart} getUserCart={this.getUserCart}
-                    showCart={this.showCart} cartVisible={this.state.cartVisible}userCart={this.state.userCart}/>
+                    showCart={this.showCart} cartVisible={this.state.cartVisible}userCart={this.state.userCart}
+                    getCartProducts={this.getCartProducts} cartProducts={this.state.cartProducts}/>
                   }
                 }}/>
               </Switch>

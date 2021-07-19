@@ -2,35 +2,39 @@ import React from 'react';
 import Table from "react-bootstrap/Table";
 
 function ViewCart(props){
-    //console.log(props.userCart.quantity)  // test
+    props.getCartProducts(props.userCart.productsId);
+    // console.log(props.cartProducts)  // test
     if (props == undefined) {
         return(
             null
         );
     }
     else {
-        // let carts = props.userCart.map((cart) => {
-        //     return <tr>
-        //         <td>{cart.productsId}</td>
-        //         <td>{cart.userId}</td>
-        //         <td>{cart.qauntity}</td>
-        //     </tr>
+        // let products = props.cartProducts.map((product) => {
+        //     return <tr key={product.id}>
+        //     <td>{product.name}</td>
+        //         <td>{product.description}</td>
+        //         <td>{product.price}</td>
+        //         <td>{props.userCart.quantity}</td>
+        //         </tr>
         // });
         return(
             <div>
                 <Table className="cartTable">
                     <thead>
                         <tr>
-                            <th>Product</th>
-                            <th>User</th>
+                        <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
                             <th>Qauntity</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                        <td>{props.userCart.productsId}</td>
-                        <td>{props.userCart.userId}</td>
-                        <td>{props.userCart.quantity}</td>
+                            <th>{props.cartProducts.name}</th>
+                            <th>{props.cartProducts.description}</th>
+                            <th>{props.cartProducts.price}</th>
+                            <th>{props.userCart.quantity}</th>
                         </tr>
                     </tbody>
                 </Table>

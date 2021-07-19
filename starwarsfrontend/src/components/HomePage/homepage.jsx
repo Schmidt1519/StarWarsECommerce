@@ -16,7 +16,7 @@ function HomePage(props) {
                     props.showCart();
                 }}>View Cart</button>
                 {props.cartVisible?(
-                    <ViewCart userCart={props.userCart}/>
+                    <ViewCart userCart={props.userCart} getCartProducts={props.getCartProducts} cartProducts={props.cartProducts}/>
                 ):null}
             </div>
             <div className="productTable">
