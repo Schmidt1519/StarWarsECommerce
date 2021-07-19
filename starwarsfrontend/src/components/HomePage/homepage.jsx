@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import {withRouter} from "react-router-dom";
 import ProductTable from "../ProductTable/productTable";
 import ViewCart from "../ShoppingCart/viewCart";
+import NavbarHome from "../Navbar/navbar"
 
 function HomePage(props) {
     console.log(props)
     return (
         <React.Fragment>
             <div>
+            <NavbarHome />
             <h1>Welcome {props.user.username}!</h1>
             
             </div>

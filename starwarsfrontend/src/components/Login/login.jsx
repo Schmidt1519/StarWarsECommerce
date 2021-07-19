@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Form, Button, Row, Col } from "react-bootstrap";
 
 class Login extends Component {
     constructor(props){
@@ -32,13 +33,21 @@ class Login extends Component {
     render(){
         return(
             <div>
-                <form onSubmit ={this.handleSubmit}>
-                    <label>Username:  </label>
-                    <input type='text' name='username' onChange={this.handleChange} value={this.state.username}/>
-                    <label>Password:  </label>
-                    <input type='text' name='password' onChange={this.handleChange} value={this.state.password}/>
-                    <input type='submit' value='Submit'/>
-                </form>
+                <Form onSubmit ={this.handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicLogin">
+                    <Row>
+                    <Col>
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control type='text' name='username' onChange={this.handleChange} value={this.state.username}/>
+                    </Col>
+                    <Col>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type='text' name='password' onChange={this.handleChange} value={this.state.password}/>
+                    </Col>
+                    </Row>
+                    </Form.Group>
+                    <Button variant="outline-primary" type='submit'>Login</Button>
+                </Form>
             </div>
         );
     }

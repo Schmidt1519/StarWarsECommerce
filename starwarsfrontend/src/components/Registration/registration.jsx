@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
 
 class Registration extends Component {
     constructor(props){
@@ -44,21 +45,44 @@ class Registration extends Component {
     render(){
         return(
             <div>
-                <form onSubmit ={this.handleSubmit}>
-                    <label>First Name:  </label>
-                    <input type='text' name='firstname' onChange={this.handleChange} value={this.state.firstname}/>
-                    <label>Last Name:  </label>
-                    <input type='text' name='lastname' onChange={this.handleChange} value={this.state.lastname}/>
-                    <label>Username:  </label>
-                    <input type='text' name='username' onChange={this.handleChange} value={this.state.username}/>
-                    <label>Password:  </label>
-                    <input type='text' name='password' onChange={this.handleChange} value={this.state.password}/>
-                    <label>Email:  </label>
-                    <input type='text' name='email' onChange={this.handleChange} value={this.state.email}/>
-                    <label>Phone Number:  </label>
-                    <input type='text' name='phonenumber' onChange={this.handleChange} value={this.state.phonenumber}/>
-                    <input type='submit' value='Submit'/>
-                </form>
+                <Form onSubmit ={this.handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicRegister">
+                    <Row>
+                    <Col>
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control type='text' name='firstname' onChange={this.handleChange} value={this.state.firstname}/>
+                    </Col>
+                    <Col>
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control type='text' name='lastname' onChange={this.handleChange} value={this.state.lastname}/>
+                    </Col>
+                    </Row>
+                    <Row>
+                    <Col>
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control type='text' name='username' onChange={this.handleChange} value={this.state.username}/>
+                    </Col>
+                    <Col>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type='text' name='password' onChange={this.handleChange} value={this.state.password}/>
+                    </Col>
+                    </Row>
+                    <Row>
+                    <Col>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type='text' name='email' onChange={this.handleChange} value={this.state.email}/>
+                    </Col>
+                    <Col>
+                    <Form.Label>Phone Number</Form.Label>
+                    <Form.Control type='text' name='phonenumber' onChange={this.handleChange} value={this.state.phonenumber}/>
+                    </Col>
+                    </Row>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicButton">
+                    <Button variant="outline-success" type='submit' value='Submit'>Register Account</Button>{' '}
+                    <Button variant="outline-danger" type='reset' value='reset'>Clear Form</Button>
+                    </Form.Group>
+                </Form>
             </div>
         );
     }

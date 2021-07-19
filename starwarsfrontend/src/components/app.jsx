@@ -5,6 +5,7 @@ import {Route, Switch, Link, Redirect} from 'react-router-dom';
 import Login from "./Login/login";
 import Registration from "./Registration/registration";
 import HomePage from "./HomePage/homepage";
+import { Container, Button } from "react-bootstrap";
 
 export class App extends Component {
     constructor(props){
@@ -25,7 +26,7 @@ export class App extends Component {
     }
 
     componentDidMount(){
-      this.getUserCart(3);
+      this.getUserCart(1);
       // this.getCartProducts(2);
         const jwt = localStorage.getItem('token');
         try{
@@ -137,6 +138,7 @@ export class App extends Component {
 
       render() {
         return (
+          <Container>
             <div>
               <h1>STAR WARS</h1>
               <Switch>
@@ -145,9 +147,9 @@ export class App extends Component {
                     return (
                     <div>
                       <div>
-                        <button onClick={() => {
+                        <Button variant="outline-primary" onClick={() => {
                           this.showForm();
-                        }}>Register</button>
+                        }}>Register</Button>
                           {this.state.visible? (
                           <Registration register={this.register}/>
                         ):null}
@@ -162,7 +164,8 @@ export class App extends Component {
                   }
                 }}/>
               </Switch>
-            </div>  
+            </div>
+            </Container>
         );
     }
 }
