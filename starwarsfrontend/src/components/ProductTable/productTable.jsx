@@ -24,7 +24,6 @@ function ProductTable(props) {
         })
         return (
             <div>
-                <h1>Welcome {props.user.username}!</h1>
                 <Table className="productTable">
                     <thead>
                         <tr>

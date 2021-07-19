@@ -18,11 +18,13 @@ export class App extends Component {
             visible: false,
             loggedIn: false,
             cart: [],
+            userCart: [],
+            cartVisible: false,
         };
     }
 
     componentDidMount(){
-      
+      this.getUserCart(3);
         const jwt = localStorage.getItem('token');
         try{
             this.setState({user: jwtDecode(jwt)});
@@ -56,11 +58,12 @@ export class App extends Component {
           console.log(this.state.token.token);
           console.log(this.state.user);
           this.productTable();
+          
         }
       };
 
       getCurrentUser = async () => {
-        let response = await axios.get('https://localhost:44394/api/examples/user/', {headers: {Authorization: 'Bearer ' + this.state.jwt}});
+        let response = await axios.get('https://localhost:44394/api/examples/user/', {headers: {Authorization: 'Bearer ' + this.state.token.token}});
         if (response === undefined) {
           this.setState({});
         } else {
@@ -95,9 +98,27 @@ export class App extends Component {
         }
     }
 
+    getUserCart = async (id) => {
+      let response = await axios.get(`https://localhost:44394/api/cart/${id}`);
+      if (response === undefined){
+            this.setState({
+            });
+        }else{
+          this.setState({
+            userCart: response.data
+        });
+        }
+    }
+
     showForm = () => {
         this.setState({
           visible: !this.state.visible,
+        });
+      };
+
+      showCart = () => {
+        this.setState({
+          cartVisible: !this.state.cartVisible,
         });
       };
 
@@ -121,7 +142,7 @@ export class App extends Component {
                           <Login {...props} login={this.login} currentUser={this.getCurrentUser}/>
                         </div>
                         )} else{
-                        return <HomePage {...props} products={this.state.productTable} user={this.state.user} createCart={this.createCart} />
+                        return <HomePage {...props} products={this.state.productTable} user={this.state.user} createCart={this.createCart} getUserCart={this.getUserCart} showCart={this.showCart} cartVisible={this.state.cartVisible} userCart={this.state.userCart}/>
                       }
                     }}/>
                 </Switch>
