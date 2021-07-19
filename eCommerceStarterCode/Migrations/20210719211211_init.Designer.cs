@@ -10,8 +10,8 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210715184022_initial")]
-    partial class initial
+    [Migration("20210719211211_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "74a8f93e-e0c4-4b12-a0a7-e4f33a7f453d",
-                            ConcurrencyStamp = "cb5d9bd1-91bd-4f84-953a-23e52d88f954",
+                            Id = "00ea60e4-eb0a-4f53-a725-aafcf9f9ff35",
+                            ConcurrencyStamp = "6f493bee-27ca-4ee6-97cb-6f02307dc130",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "f3a2ab05-470b-4b85-8a71-59116eb08bef",
-                            ConcurrencyStamp = "74f80b81-0b7e-48cb-b5bd-ecd7dbf73b36",
+                            Id = "5eb5dc10-cfb1-4162-a5de-82600cb15402",
+                            ConcurrencyStamp = "781684eb-e738-47f5-be29-5b8616c7fe7d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -190,8 +190,8 @@ namespace eCommerceStarterCode.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -206,8 +206,6 @@ namespace eCommerceStarterCode.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ProductId");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -377,17 +375,6 @@ namespace eCommerceStarterCode.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
-                {
-                    b.HasOne("eCommerceStarterCode.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("eCommerceStarterCode.Models.Review", b =>

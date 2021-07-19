@@ -56,15 +56,13 @@ namespace eCommerceStarterCode.Controllers
             return StatusCode(201, value);
         }
 
-        //[HttpPatch("add/{id:int}")]
-
-        //public IActionResult AddQuantity(int id)
-        //{
-        //    var cart = _context.ShoppingCarts.Find(id);
-        //    var add = cart.Quantity += 1;
-        //    _context.SaveChanges();
-
-        //    return Ok(cart);
-        //}
+        [HttpPut("update/{id:int}")]
+        public IActionResult PostProduct(int id, [FromBody] Models.ShoppingCart value)
+        {
+            var cart = _context.ShoppingCarts.Find(id);
+            _context.ShoppingCarts.Update(value);
+            _context.SaveChanges();
+            return StatusCode(201, cart);
+        }
     }
 }

@@ -9,6 +9,12 @@ function ViewCart(props){
         );
     }
     else {
+        let carts = props.filterCart.map((cart) => {
+            return <tr>
+            <td>{cart.quantity}</td>
+                </tr>
+        });
+
         let products = props.userProducts.map((product) => {
             return <tr key={product.id}>
             <td>{product.name}</td>
@@ -19,19 +25,32 @@ function ViewCart(props){
         });
         return(
             <div>
+                <div>
                 <Table className="cartTable">
                     <thead>
                         <tr>
                         <th>Name</th>
                             <th>Description</th>
                             <th>Price</th>
-                            <th>Quantity</th>
                         </tr>
                     </thead>
                     <tbody>
                         {products}
                     </tbody>
                 </Table>
+                </div>
+                <div>
+                <Table className="cartTable">
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {carts}
+                    </tbody>
+                </Table>
+                </div>
             </div>
         )
     }
