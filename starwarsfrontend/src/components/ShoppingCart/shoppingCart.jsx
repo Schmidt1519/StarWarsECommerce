@@ -4,7 +4,7 @@ class ShoppingCart extends Component {
     constructor(props){
         super(props);
         this.state = {
-            productsid: '',
+            productsid: 0,
             userid: '',
             quantity: 0,
         }
@@ -18,15 +18,18 @@ class ShoppingCart extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        let string = this.state.quantity;
+        let number = parseInt(string);
         const cart = {
-            productsid: this.props.productsid,
+            productsid: this.props.productid,
             userid: this.props.userid,
-            quantity: this.state.quantity,
+            quantity: number,
         }
         
+        console.log(cart);
         this.props.createCart(cart);
         this.setState({
-            productsid: '',
+            productsid: 0,
             userid: '',
             quantity: 0,
         });
@@ -37,7 +40,7 @@ class ShoppingCart extends Component {
             <div>
                 <form onSubmit ={this.handleSubmit}>
                     <label>Quantity:  </label>
-                    <input type='text' name='quantity' onChange={this.handleChange} value={this.state.quantity}/>
+                    <input type='number' name='quantity' onChange={this.handleChange} value={this.state.quantity}/>
                     <input type='submit' value='Add'/>
                 </form>
             </div>

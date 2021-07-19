@@ -9,7 +9,7 @@ import HomePage from "./HomePage/homepage";
 export class App extends Component {
     constructor(props){
         super(props)
-        this.state = { 
+        this.state = {
             token: [],
             user: [],
             currentUser: [],
@@ -18,15 +18,16 @@ export class App extends Component {
             visible: false,
             loggedIn: false,
             cart: [],
+            userCart: [],
+            cartVisible: false,
         };
     }
 
     componentDidMount(){
-        this.productTable();
+      this.getUserCart(3);
         const jwt = localStorage.getItem('token');
         try{
-            const user = jwtDecode(jwt);
-            this.setState({user});
+            this.setState({user: jwtDecode(jwt)});
         }catch {}
     }
 
@@ -45,7 +46,6 @@ export class App extends Component {
     };
 
     login = async (login) => {
-        console.log(user);
         let response = await axios.post('https://localhost:44394/api/authentication/login/', login);
         if (response === undefined) {
           this.setState({});
@@ -54,20 +54,23 @@ export class App extends Component {
             token: response.data,
             loggedIn: !this.state.loggedIn,
           });
-          console.log(this.state.token)
+          localStorage.setItem('token', this.state.token.token);
+          console.log(this.state.token.token);
+          console.log(this.state.user);
+          this.productTable();
+          
         }
       };
 
       getCurrentUser = async () => {
-        console.log(user);
-        let response = await axios.get('https://localhost:44394/api/examples/user/');
+        let response = await axios.get('https://localhost:44394/api/examples/user/', {headers: {Authorization: 'Bearer ' + this.state.token.token}});
         if (response === undefined) {
           this.setState({});
         } else {
           this.setState({
-            currentUser: response.data,
+            user: response.data,
           });
-          console.log(this.state.currentUser)
+          console.log(this.state.user)
         }
       };
 
@@ -84,14 +87,26 @@ export class App extends Component {
     }
 
     createCart = async (cart) => {
-        try{
-            let response = await axios.post('https://localhost:44394/api/cart', cart)
+      let response = await axios.post('https://localhost:44394/api/cart', cart);
+      if (response === undefined){
             this.setState({
-                cart: response.data
             });
+        }else{
+          this.setState({
+            cart: response.data
+        });
         }
-        catch(err) {
-            console.log(err);
+    }
+
+    getUserCart = async (id) => {
+      let response = await axios.get(`https://localhost:44394/api/cart/${id}`);
+      if (response === undefined){
+            this.setState({
+            });
+        }else{
+          this.setState({
+            userCart: response.data
+        });
         }
     }
 
@@ -101,30 +116,38 @@ export class App extends Component {
         });
       };
 
+      showCart = () => {
+        this.setState({
+          cartVisible: !this.state.cartVisible,
+        });
+      };
+
       render() {
         return (
             <div>
-                <h1>STAR WARS</h1>
-                <Switch>
-                    <Route path='/homePage' render={props =>{
-                      if(this.state.loggedIn == false){
-                        return (
-                        <div>
-                          <div>
-                            <button onClick={() => {
-                              this.showForm();
-                            }}>Register</button>
-                              {this.state.visible? (
-                              <Registration register={this.register}/>
-                            ):null}
-                          </div>
-                          <Login {...props} login={this.login} currentUser={this.getCurrentUser}/>
-                        </div>
-                        )} else{
-                        return <HomePage {...props} products={this.state.productTable} user={this.state.user} />
-                      }
-                    }}/>
-                </Switch>
+              <h1>STAR WARS</h1>
+              <Switch>
+                <Route path='/' render={props =>{
+                  if(this.state.loggedIn === false){
+                    return (
+                    <div>
+                      <div>
+                        <button onClick={() => {
+                          this.showForm();
+                        }}>Register</button>
+                          {this.state.visible? (
+                          <Registration register={this.register}/>
+                        ):null}
+                      </div>
+                      <Login {...props} login={this.login} currentUser={this.getCurrentUser}/>
+                    </div>
+                    )} else{
+                    return <HomePage {...props} products={this.state.productTable} 
+                    user={this.state.user} createCart={this.createCart} getUserCart={this.getUserCart}
+                    showCart={this.showCart} cartVisible={this.state.cartVisible}userCart={this.state.userCart}/>
+                  }
+                }}/>
+              </Switch>
             </div>  
         );
     }

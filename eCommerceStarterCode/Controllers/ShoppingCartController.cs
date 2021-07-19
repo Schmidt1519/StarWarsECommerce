@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 namespace eCommerceStarterCode.Controllers
 {
     [Route("api/cart")]
@@ -19,8 +20,18 @@ namespace eCommerceStarterCode.Controllers
             _context = context;
         }
 
-        //GET Shopping Cart
-       [HttpGet("{id:int}")]
+        // GET all Shopping Carts
+        [HttpGet("carts")]
+
+        public IActionResult GetAllCarts()
+        {
+            // Retrieve all carts from database
+            var carts = _context.ShoppingCarts.ToList();
+            return Ok(carts);
+        }
+
+        //GET a Shopping Cart
+        [HttpGet("{id:int}")]
         public IActionResult GetShoppingCart(int id)
         {
             var shoppingCart = _context.ShoppingCarts.Find(id);

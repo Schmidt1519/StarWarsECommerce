@@ -11,14 +11,16 @@ function ProductTable(props) {
             null
         );
     } else {
+        console.log(props);
         let products = props.products.map((product) => {
+            
             return <tr key={product.id}>
             <td>{product.name}</td>
                 <td>{product.description}</td>
                 <td>{product.price}</td>
                 <td>{product.rating}</td>
                 <td>{product.categoryId}</td>
-                <ShoppingCart productid={product.id} userid={props.user.id}/>
+                <ShoppingCart productid={product.productId} userid={props.user.id} createCart={props.createCart}/>
             </tr>
         })
         return (
