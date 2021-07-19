@@ -2,19 +2,20 @@ import React from 'react';
 import Table from "react-bootstrap/Table";
 
 function ViewCart(props){
-    console.log(props)  // test
-    if (props.userCart.userCart == undefined) {
+    console.log(props.userCart.quantity)  // test
+    if (props == undefined) {
         return(
             null
         );
-    }else {
-        let carts = props.userCart.userCart.map((cart) => {
-            return <tr key = {cart.ShoppingCartId}>
-                <td>{cart.ProductsId}</td>
-                <td>{cart.UserId}</td>
-                <td>{cart.Qauntity}</td>
-            </tr>
-        })
+    }
+    else {
+        // let carts = props.userCart.map((cart) => {
+        //     return <tr>
+        //         <td>{cart.productsId}</td>
+        //         <td>{cart.userId}</td>
+        //         <td>{cart.qauntity}</td>
+        //     </tr>
+        // });
         return(
             <div>
                 <Table className="cartTable">
@@ -26,7 +27,11 @@ function ViewCart(props){
                         </tr>
                     </thead>
                     <tbody>
-                        {carts}
+                        <tr>
+                        <td>{props.userCart.productsId}</td>
+                        <td>{props.userCart.userId}</td>
+                        <td>{props.userCart.quantity}</td>
+                        </tr>
                     </tbody>
 
                 </Table>

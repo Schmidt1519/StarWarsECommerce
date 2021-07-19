@@ -24,7 +24,7 @@ export class App extends Component {
     }
 
     componentDidMount(){
-      this.getUserCart(3);
+      
         const jwt = localStorage.getItem('token');
         try{
             this.setState({user: jwtDecode(jwt)});
@@ -58,7 +58,7 @@ export class App extends Component {
           console.log(this.state.token.token);
           console.log(this.state.user);
           this.productTable();
-          
+          this.getUserCart(3);
         }
       };
 

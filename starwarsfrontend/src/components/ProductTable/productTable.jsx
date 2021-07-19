@@ -3,6 +3,7 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import homepage from "../HomePage/homepage";
 import ShoppingCart from "../ShoppingCart/shoppingCart";
+import ViewCart from "../ShoppingCart/viewCart";
 
 function ProductTable(props) {
     if (props.products === undefined) {
@@ -38,6 +39,7 @@ function ProductTable(props) {
                         {products}
                     </tbody>
                 </Table>
+                <ViewCart userCart={props.userCart}/>
             </div>
         )
     }

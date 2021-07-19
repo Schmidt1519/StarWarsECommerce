@@ -11,19 +11,13 @@ function HomePage(props) {
             <h1>Welcome {props.user.username}!</h1>
             
             </div>
-            {/* <div>
-                <button onClick={() => {
-                    props.showCart();
-                }}>View Cart</button>
-                {props.cartVisible?(
-                    <ViewCart userCart={props.userCart}/>
-                ):null}
-            </div> */}
+            
             <div className="productTable">
-                 <ProductTable products={props.products} user={props.user} createCart={props.createCart}/>
+                 <ProductTable products={props.products} user={props.user} createCart={props.createCart} userCart={props.userCart}/>
+                 
             </div>
             <div>
-            <ViewCart userCart={props.history.userCart}/>
+            
             </div>
         </React.Fragment>
     )
