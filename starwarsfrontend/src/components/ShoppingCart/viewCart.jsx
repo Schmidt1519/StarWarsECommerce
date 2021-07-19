@@ -1,5 +1,6 @@
 import React from 'react';
 import Table from "react-bootstrap/Table";
+
 function ViewCart(props){
     //console.log(props.userCart.quantity)  // test
     if (props == undefined) {
@@ -37,4 +38,5 @@ function ViewCart(props){
         )
     }
 }
+
 export default ViewCart;

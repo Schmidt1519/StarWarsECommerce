@@ -58,7 +58,6 @@ export class App extends Component {
           console.log(this.state.token.token);
           console.log(this.state.user);
           this.productTable();
-          
         }
       };
 
