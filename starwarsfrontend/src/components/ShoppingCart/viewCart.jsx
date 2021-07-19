@@ -11,7 +11,7 @@ function ViewCart(props){
     else {
         let products = props.userProducts.map((product) => {
             return <tr key={product.id}>
-                <td>{product.name}</td>
+            <td>{product.name}</td>
                 <td>{product.description}</td>
                 <td>{product.price}</td>
                 
