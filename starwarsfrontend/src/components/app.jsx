@@ -65,9 +65,9 @@ export class App extends Component {
           this.setState({});
         } else {
           this.setState({
-            currentUser: response.data,
+            user: response.data,
           });
-          console.log(this.state.currentUser)
+          console.log(this.state.user)
         }
       };
 
