@@ -24,8 +24,10 @@ export class App extends Component {
           cart: [],
           allCarts: [],
           filterCart: [],
+          updateFilterCart: [],
           filterProductId: [],
           cartVisible: false,
+          // searchQuery: [],
         };
     }
 
@@ -53,7 +55,6 @@ export class App extends Component {
     };
 
     login = async (login) => {
-
         let response = await axios.post('https://localhost:44394/api/authentication/login/', login);
         if (response === undefined) {
           this.setState({});
@@ -69,49 +70,67 @@ export class App extends Component {
         }
       };
 
-      getCurrentUser = async () => {
+    getCurrentUser = async () => {
+      try{
         const jwt = localStorage.getItem('token');
         let response = await axios.get('https://localhost:44394/api/examples/user/', {headers: {Authorization: 'Bearer ' + jwt}});
         if (response === undefined) {
           this.setState({});
-        } else {
+        } 
+        else {
           this.setState({
             user: response.data,
           });
           console.log(this.state.user)
         }
-      };
+      }
+      catch(err) {
+        console.log(err);
+      }
+    };
 
 // PRODUCTS FUNCTIONS
     productTable = async () => {
+      try{
         let response = await axios.get('https://localhost:44394/api/products/products/');
+        if (response === undefined) {
+            this.setState({});
+        } 
+        else {
+            this.setState({
+                productTable: response.data
+                // searchQuery: response.data
+            });
+            console.log(this.state.productTable);
+          }
+      }
+      catch (err) {
+        console.log(err);
+      }
+    };
+
+    getAllCategories = async () => {
+      try{
+        let response = await axios.get('https://localhost:44394/api/category/categories/');
         if (response === undefined) {
             this.setState({});
         } else {
             this.setState({
-                productTable: response.data
+                categories: response.data
             });
-            console.log(this.state.productTable);
+            console.log(this.state.categories);
+          }
         }
-    };
-
-    getAllCategories = async () => {
-      let response = await axios.get('https://localhost:44394/api/category/categories/');
-      if (response === undefined) {
-          this.setState({});
-      } else {
-          this.setState({
-              categories: response.data
-          });
-          console.log(this.state.categories);
-      }
+        catch (err) {
+          console.log(err);
+        }
     };
 
     filterProductTable = (searchQuery) => {
       console.log(this.state.productTable);
       const productFilter = this.state.productTable.filter(prod => 
-        prod.name.includes(searchQuery) 
-        //prod.categoryId.includes(searchQuery) 
+        prod.name.includes(searchQuery) || 
+        prod.category.includes(searchQuery) 
       )
       console.log(productFilter);
       this.setState({
@@ -119,19 +138,30 @@ export class App extends Component {
       })
     }
 
+    // filterProductTable = (searchQuery) => {
+    //   this.setState({
+    //     productTable: searchQuery
+    //   })
+    // }
+
 // SHOPPING CART FUNCTIONS
     getCartProducts = async (id) => {
-      let response = await axios.get(`https://localhost:44394/api/products/${id}`);
-      if (response === undefined) {
-          this.setState({});
-      } else {
-          this.setState({
-            cartProducts: response.data
-          });
-          // console.log(this.state.cartProducts);
-          this.state.products.push(this.state.cartProducts);
+      try{
+        let response = await axios.get(`https://localhost:44394/api/products/${id}`);
+        if (response === undefined) {
+            this.setState({});
+        } else {
+            this.setState({
+              cartProducts: response.data
+            });
+            // console.log(this.state.cartProducts);
+            this.state.products.push(this.state.cartProducts);
+          }
       }
-  };
+      catch(err) {
+        console.log(err);
+      }
+    };
 
     createCart = async (cart) => {
       let response = await axios.post('https://localhost:44394/api/cart', cart);
@@ -157,22 +187,37 @@ export class App extends Component {
         }
     }
 
+    deleteFromCart = async (id) => {
+      try{
+        await axios.delete(`https://localhost:44394/api/cart/remove/${id}/`)
+        await this.getAllCarts();
+      }
+      catch(err) {
+        console.log(err);
+      }
+    }
+
     getAllCarts = async () => {
-      let response = await axios.get('https://localhost:44394/api/cart/carts/');
-      if (response === undefined){
-        this.setState({
-        });
-      } else{
-        this.setState({
-          allCarts: response.data,
-        });
-        console.log(this.state.allCarts);
-        console.log(response.data);
-        console.log(this.state.user.id);
-        console.log(this.state.allCarts.userId);
-        this.filterCart();
-        this.productIdToList();
-        this.getProducts();
+      try{
+        let response = await axios.get('https://localhost:44394/api/cart/carts/');
+        if (response === undefined){
+          this.setState({
+          });
+        } else{
+          this.setState({
+            allCarts: response.data,
+          });
+          console.log(this.state.allCarts);
+          console.log(response.data);
+          console.log(this.state.user.id);
+          console.log(this.state.allCarts.userId);
+          this.filterCart();
+          this.productIdToList();
+          this.getProducts();
+        }
+      }
+      catch(err) {
+        console.log(err);
       }
     }
 
@@ -182,7 +227,15 @@ export class App extends Component {
     this.setState({
       filterCart: filtered
     })
-    console.log(this.state.filterCart);
+    console.log(this.state.filterCart[0].productsId);
+    }
+
+    updateFilterCart = (productId) => {
+      let filtered = this.state.filterCart.filter(cart => cart.productsId.includes(productId))
+      this.setState({
+        updateFilterCart: filtered
+      })
+      console.log(this.state.filterCart.updateFilterCart);
     }
 
     productIdToList =() => {
@@ -202,50 +255,54 @@ export class App extends Component {
       console.log(this.state.products)
     }
 
+// REVIEW FUNCTIONS
+    // createReview function
+
     showForm = () => {
         this.setState({
           visible: !this.state.visible,
         });
       };
 
-      showCart = () => {
-        this.setState({
-          cartVisible: !this.state.cartVisible,
-        });
-      };
+    showCart = () => {
+      this.setState({
+        cartVisible: !this.state.cartVisible,
+      });
+    };
 
-      render() {
-        return (
-          <Container>
-            <div>
-              <h1>STAR WARS</h1>
-              <Switch>
-                <Route path='/' render={props =>{
-                  if(this.state.loggedIn === false){
-                    return (
-                    <div>
-                      <div>
-                        <Button variant="outline-primary" onClick={() => {
-                          this.showForm();
-                        }}>Register</Button>
-                          {this.state.visible? (
-                          <Registration register={this.register}/>
-                        ):null}
-                      </div>
-                      <Login {...props} login={this.login} currentUser={this.getCurrentUser}/>
-                    </div>
-                    )} else{
-                      return <HomePage {...props} products={this.state.productTable} 
-                      user={this.state.user} createCart={this.createCart} showCart={this.showCart}
-                       cartVisible={this.state.cartVisible} userProducts={this.state.products}
-                      getCartProducts={this.getCartProducts} cartProducts={this.state.cartProducts}
-                      filterCart={this.state.filterCart} filterProductTable={this.filterProductTable}/>
-                  }
-                }}/>
-              </Switch>
-            </div>
-            </Container>
-        );
+    render() {
+      return (
+        <Container>
+        <div>
+          <h1>STAR WARS</h1>
+          <Switch>
+            <Route path='/' render={props =>{
+              if(this.state.loggedIn === false){
+                return (
+                <div>
+                  <div>
+                    <Button variant="outline-primary" onClick={() => {
+                      this.showForm();
+                    }}>Register</Button>
+                      {this.state.visible? (
+                      <Registration register={this.register}/>
+                    ):null}
+                  </div>
+                  <Login {...props} login={this.login} currentUser={this.getCurrentUser}/>
+                </div>
+                )} else{
+                  return <HomePage {...props} products={this.state.productTable} 
+                  user={this.state.user} createCart={this.createCart} showCart={this.showCart}
+                    cartVisible={this.state.cartVisible} userProducts={this.state.products}
+                  getCartProducts={this.getCartProducts} cartProducts={this.state.cartProducts}
+                  filterCart={this.state.filterCart} filterProductTable={this.filterProductTable}
+                  deleteFromCart={this.deleteFromCart}/>
+              }
+            }}/>
+          </Switch>
+        </div>
+        </Container>
+      );
     }
 }
 

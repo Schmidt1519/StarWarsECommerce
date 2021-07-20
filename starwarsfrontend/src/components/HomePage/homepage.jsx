@@ -14,7 +14,7 @@ function HomePage(props) {
             <h1>Welcome {props.user.userName}!</h1>
             </div>
             <div>
-                <SearchBar filterProductTable={props.filterProductTable}/>
+                <SearchBar filterProductTable={props.filterProductTable} products={props.productTable}/>
             </div>
             <div>
                 <button onClick={() => {
@@ -22,7 +22,8 @@ function HomePage(props) {
                 }}>View Cart</button>
                 {props.cartVisible?(
                     <ViewCart userProducts={props.userProducts} getCartProducts={props.getCartProducts} 
-                    cartProducts={props.cartProducts} filterCart={props.filterCart}/>
+                    cartProducts={props.cartProducts} filterCart={props.filterCart}
+                    deleteFromCart={props.deleteFromCart}/>
                 ):null}
             </div>
             <div className="productTable">

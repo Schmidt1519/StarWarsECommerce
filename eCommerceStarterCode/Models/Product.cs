@@ -13,11 +13,7 @@ namespace eCommerceStarterCode.Models
         public string Description { get; set; }
         public float Price { get; set; }
         public int Rating { get; set; }
+        public string Category { get; set; }
         public ICollection<ShoppingCart> ShoppingCarts { get; set; }
-
-        [ForeignKey("Category")]
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
     }
-
 }

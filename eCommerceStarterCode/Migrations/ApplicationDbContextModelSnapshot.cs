@@ -48,16 +48,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-
-                            Id = "1fcf7346-b1ce-4d1b-a482-f3b53611ceed",
-                            ConcurrencyStamp = "fd480e2a-0bb9-4954-bdcc-912e1ec376fc",
+                            Id = "a22fc8e5-acfc-4e3a-b939-83a2ebd9c8bd",
+                            ConcurrencyStamp = "b52223b8-35ee-41cb-9203-09ec0d35a96f",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "c7d98015-4c42-4323-a1cb-20507bbcb592",
-                            ConcurrencyStamp = "531db0d8-3712-4471-8497-743492e6f0da",
+                            Id = "d90a1731-ea6e-418a-b51d-201d2dd00adf",
+                            ConcurrencyStamp = "a8b91619-c0a9-4077-b805-ff0ef19ae65b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -189,8 +188,8 @@ namespace eCommerceStarterCode.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -205,8 +204,6 @@ namespace eCommerceStarterCode.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ProductId");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -376,17 +373,6 @@ namespace eCommerceStarterCode.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
-                {
-                    b.HasOne("eCommerceStarterCode.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("eCommerceStarterCode.Models.Review", b =>
