@@ -277,6 +277,7 @@ export class App extends Component {
         <div>
           <h1>STAR WARS</h1>
           <Switch>
+              <Route path='/post' render={props => <ProductListingPage {...props}getProducts = {this.getProducts}/>}/>
             <Route path='/' render={props =>{
               if(this.state.loggedIn === false){
                 return (
@@ -300,6 +301,7 @@ export class App extends Component {
                   deleteFromCart={this.deleteFromCart}/>
               }
             }}/>
+
           </Switch>
         </div>
         </Container>

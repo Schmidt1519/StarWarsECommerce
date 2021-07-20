@@ -9,15 +9,15 @@ class PostProduct extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: null,
-            description: null,
-            price: null,
-            rating: null,
-            category: null,
+            name: "",
+            description: "",
+            price: 0,
+            rating: 0,
+            category: "",
             errors: {
-                name: null,
-                description: null,
-                price: null,
+                name: "",
+                description: "",
+                price: "",
             }
         }
         this.handleChange = this.handleChange.bind(this);
@@ -25,14 +25,21 @@ class PostProduct extends Component {
     }
 
     async createListing() {
+        let price = this.state.price;
+        let rating = this.state.rating;
+        let pNum = parseInt(price);
+        let rNum = parseInt(rating);
         const product = {
             name: this.state.name,
             description: this.state.description,
-            price: this.state.price,
+            price: pNum,
+            rating: rNum,
             category: this.state.category,
         }
         try {
+            console.log(product);
             await axios.post("https://localhost:44394/api/products/", product);
+
             this.props.updateTable()
             this.setState({});
             alert(`${this.state.name} has been added to product listings`)
@@ -52,7 +59,10 @@ class PostProduct extends Component {
                 errors.description = event.target.value.length < 1 ? 'Description Must Be Filled Out' : null;
                 break;
             case 'price':
-                errors.description = event.target.value.length < 1 ? 'Must have a Price' : null;
+                errors.price = event.target.value.length < 1 ? 'Must have a Price' : null;
+                break;
+            case 'rating':
+                errors.rating = event.target.value.length < 0 ? 'Must have a rating' : null;
                 break;
         }
         this.setState({
@@ -90,6 +100,13 @@ class PostProduct extends Component {
                                       onChange={this.handleChange} value={this.state.price}/>
                     </Form.Group>
                     {this.state.errors.price ? <p style={{color: 'red'}}>{this.state.errors.price}</p> : ''}
+
+                    <Form.Group controlId="rating">
+                        <Form.Label>Rating</Form.Label>
+                        <Form.Control type="text" placeholder="What would you rate this product as 0-100" name="rating"
+                                      onChange={this.handleChange} value={this.state.rating}/>
+                    </Form.Group>
+                    {this.state.errors.rating ? <p style={{color: 'red'}}>{this.state.errors.rating}</p> : ''}
 
                     <Form.Group controlId="category">
                         <Form.Label>Category</Form.Label>
