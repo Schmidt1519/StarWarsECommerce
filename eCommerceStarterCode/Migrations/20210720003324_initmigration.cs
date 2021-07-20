@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
-    public partial class init : Migration
+    public partial class initmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -234,12 +234,12 @@ namespace eCommerceStarterCode.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "00ea60e4-eb0a-4f53-a725-aafcf9f9ff35", "6f493bee-27ca-4ee6-97cb-6f02307dc130", "User", "USER" });
+                values: new object[] { "8f294be9-eb98-460a-b295-63cdb63a9771", "9c965f8f-b891-4a21-9109-46ed3be102ca", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "5eb5dc10-cfb1-4162-a5de-82600cb15402", "781684eb-e738-47f5-be29-5b8616c7fe7d", "Admin", "ADMIN" });
+                values: new object[] { "931f2c9d-f32b-4792-af6b-0a292ad9e61d", "37e8c167-fd6e-4bb3-a764-7f9e7c4e4173", "Admin", "ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
