@@ -3,7 +3,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
+<<<<<<< HEAD:eCommerceStarterCode/Migrations/20210719220350_init.cs
     public partial class init : Migration
+=======
+    public partial class initmigration : Migration
+>>>>>>> a9b667744ccc7ffd8ceee82b5226126cbf7db225:eCommerceStarterCode/Migrations/20210720003324_initmigration.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -234,12 +238,20 @@ namespace eCommerceStarterCode.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+<<<<<<< HEAD:eCommerceStarterCode/Migrations/20210719220350_init.cs
                 values: new object[] { "a22fc8e5-acfc-4e3a-b939-83a2ebd9c8bd", "b52223b8-35ee-41cb-9203-09ec0d35a96f", "User", "USER" });
+=======
+                values: new object[] { "8f294be9-eb98-460a-b295-63cdb63a9771", "9c965f8f-b891-4a21-9109-46ed3be102ca", "User", "USER" });
+>>>>>>> a9b667744ccc7ffd8ceee82b5226126cbf7db225:eCommerceStarterCode/Migrations/20210720003324_initmigration.cs
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+<<<<<<< HEAD:eCommerceStarterCode/Migrations/20210719220350_init.cs
                 values: new object[] { "d90a1731-ea6e-418a-b51d-201d2dd00adf", "a8b91619-c0a9-4077-b805-ff0ef19ae65b", "Admin", "ADMIN" });
+=======
+                values: new object[] { "931f2c9d-f32b-4792-af6b-0a292ad9e61d", "37e8c167-fd6e-4bb3-a764-7f9e7c4e4173", "Admin", "ADMIN" });
+>>>>>>> a9b667744ccc7ffd8ceee82b5226126cbf7db225:eCommerceStarterCode/Migrations/20210720003324_initmigration.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

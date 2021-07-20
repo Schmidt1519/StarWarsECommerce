@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import { withRouter } from 'react-router-dom';
 
 class PostProduct extends Component {
     constructor(props) {
@@ -104,4 +105,4 @@ class PostProduct extends Component {
     }
 }
 
-export default PostProduct;
+export default withRouter (PostProduct);

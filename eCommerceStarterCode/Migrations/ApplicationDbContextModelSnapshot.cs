@@ -55,8 +55,8 @@ namespace eCommerceStarterCode.Migrations
                         },
                         new
                         {
-                            Id = "d90a1731-ea6e-418a-b51d-201d2dd00adf",
-                            ConcurrencyStamp = "a8b91619-c0a9-4077-b805-ff0ef19ae65b",
+                            Id = "c7d98015-4c42-4323-a1cb-20507bbcb592",
+                            ConcurrencyStamp = "531db0d8-3712-4471-8497-743492e6f0da",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

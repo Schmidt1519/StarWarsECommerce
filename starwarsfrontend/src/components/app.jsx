@@ -6,6 +6,7 @@ import Login from "./Login/login";
 import Registration from "./Registration/registration";
 import HomePage from "./HomePage/homepage";
 import { Container, Button } from "react-bootstrap";
+import ProductListingPage from "./ProductTable/ProductListingPage";
 
 export class App extends Component {
     constructor(props){
