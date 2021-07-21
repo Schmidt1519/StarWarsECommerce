@@ -49,19 +49,6 @@ namespace eCommerceStarterCode.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -70,7 +57,7 @@ namespace eCommerceStarterCode.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<float>(type: "real", nullable: false),
-                    Rating = table.Column<int>(type: "int", nullable: false),
+                    AverageRating = table.Column<int>(type: "int", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -191,6 +178,7 @@ namespace eCommerceStarterCode.Migrations
                     ReviewId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rating = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -234,12 +222,12 @@ namespace eCommerceStarterCode.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "5c632cc4-cb7c-4e83-af8d-370e0c4fb2ef", "9bed497d-0795-4e6f-978a-7892c8f5b850", "User", "USER" });
+                values: new object[] { "a69898c8-f234-4e9b-85c9-8e40adba6d9a", "d5dc139b-dc60-4718-af53-00c7b8dd3650", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "4c4aa8aa-7514-466c-82bc-228f52c223d5", "37afee6d-b1bf-43d8-802b-8c55205f1a8f", "Admin", "ADMIN" });
+                values: new object[] { "a1e264e7-997f-4572-9e15-c09c4c61a74f", "3ae2eb27-7158-4109-bd12-ac18fab514e2", "Admin", "ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -312,9 +300,6 @@ namespace eCommerceStarterCode.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Reviews");

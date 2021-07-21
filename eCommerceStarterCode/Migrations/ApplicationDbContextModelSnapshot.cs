@@ -48,15 +48,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5c632cc4-cb7c-4e83-af8d-370e0c4fb2ef",
-                            ConcurrencyStamp = "9bed497d-0795-4e6f-978a-7892c8f5b850",
+                            Id = "a69898c8-f234-4e9b-85c9-8e40adba6d9a",
+                            ConcurrencyStamp = "d5dc139b-dc60-4718-af53-00c7b8dd3650",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "4c4aa8aa-7514-466c-82bc-228f52c223d5",
-                            ConcurrencyStamp = "37afee6d-b1bf-43d8-802b-8c55205f1a8f",
+                            Id = "a1e264e7-997f-4572-9e15-c09c4c61a74f",
+                            ConcurrencyStamp = "3ae2eb27-7158-4109-bd12-ac18fab514e2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -166,27 +166,15 @@ namespace eCommerceStarterCode.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("eCommerceStarterCode.Models.Category", b =>
-                {
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CategoryId");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AverageRating")
+                        .HasColumnType("int");
 
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
@@ -199,9 +187,6 @@ namespace eCommerceStarterCode.Migrations
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
 
                     b.HasKey("ProductId");
 
@@ -219,6 +204,9 @@ namespace eCommerceStarterCode.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
                         .HasColumnType("int");
 
                     b.HasKey("ReviewId");
@@ -377,13 +365,13 @@ namespace eCommerceStarterCode.Migrations
 
             modelBuilder.Entity("eCommerceStarterCode.Models.Review", b =>
                 {
-                    b.HasOne("eCommerceStarterCode.Models.Product", "Procuct")
+                    b.HasOne("eCommerceStarterCode.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Procuct");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("eCommerceStarterCode.Models.ShoppingCart", b =>

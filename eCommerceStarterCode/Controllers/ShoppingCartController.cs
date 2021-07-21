@@ -30,7 +30,7 @@ namespace eCommerceStarterCode.Controllers
         {
             // Retrieve all carts from database
             var carts = _context.ShoppingCarts.Include(s => s.User).Include(s => s.Product).ToList()
-                .Select(s => new {shoppingCardId = s.ShoppingCartId, quantity = s.Quantity, productId = s.ProductsId, productName = s.Product.Name, productDesc = s.Product.Description, productPrice = s.Product.Price, userId = s.User.Id });
+                .Select(s => new {shoppingCartId = s.ShoppingCartId, quantity = s.Quantity, productId = s.ProductsId, productName = s.Product.Name, productDesc = s.Product.Description, productPrice = s.Product.Price, userId = s.User.Id });
             return Ok(carts);
         }
 

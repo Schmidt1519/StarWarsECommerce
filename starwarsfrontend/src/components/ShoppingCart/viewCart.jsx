@@ -12,11 +12,13 @@ function ViewCart(props){
     }
     else {
         let carts = props.filterCart.map((cart) => {
+            console.log(cart);
+            console.log(cart.shoppingCartId);
             return <tr key={cart.id}>
                 <td>{cart.productName}</td>
                 <td>{cart.productDesc}</td>
                 <td>{cart.productPrice}</td>
-            <td>{cart.quantity}</td>
+                <td>{cart.quantity}</td>
             <DeleteFromCart cartid={cart.shoppingCartId} deleteFromCart={props.deleteFromCart}/>
                 </tr>
         });

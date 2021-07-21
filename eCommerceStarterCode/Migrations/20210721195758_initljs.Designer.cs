@@ -10,8 +10,8 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210721145216_init")]
-    partial class init
+    [Migration("20210721195758_initljs")]
+    partial class initljs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7e90f774-f01e-4535-9c3d-52999ead570d",
-                            ConcurrencyStamp = "c64b6dcf-6b1d-449e-bd45-5b008dc57751",
+                            Id = "a69898c8-f234-4e9b-85c9-8e40adba6d9a",
+                            ConcurrencyStamp = "d5dc139b-dc60-4718-af53-00c7b8dd3650",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "3fb88cba-6ea9-4fe8-b4cd-990c88063378",
-                            ConcurrencyStamp = "3a0a880f-8a82-4a5f-b754-8ebc1e98be8e",
+                            Id = "a1e264e7-997f-4572-9e15-c09c4c61a74f",
+                            ConcurrencyStamp = "3ae2eb27-7158-4109-bd12-ac18fab514e2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -168,27 +168,15 @@ namespace eCommerceStarterCode.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("eCommerceStarterCode.Models.Category", b =>
-                {
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CategoryId");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AverageRating")
+                        .HasColumnType("int");
 
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
@@ -201,9 +189,6 @@ namespace eCommerceStarterCode.Migrations
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
 
                     b.HasKey("ProductId");
 
@@ -221,6 +206,9 @@ namespace eCommerceStarterCode.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
                         .HasColumnType("int");
 
                     b.HasKey("ReviewId");
@@ -379,13 +367,13 @@ namespace eCommerceStarterCode.Migrations
 
             modelBuilder.Entity("eCommerceStarterCode.Models.Review", b =>
                 {
-                    b.HasOne("eCommerceStarterCode.Models.Product", "Procuct")
+                    b.HasOne("eCommerceStarterCode.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Procuct");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("eCommerceStarterCode.Models.ShoppingCart", b =>

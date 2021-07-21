@@ -33,9 +33,9 @@ class ShoppingCart extends Component {
     productIdCheck = (cart) => {
         if(this.props.filteredProductId.includes(cart.productsid)){
             this.props.updateFilterCart(cart.productsid);
-            this.props.updateCart(this.props.updateFilter[0].shoppingCardId, cart);
+            this.props.updateCart(this.props.updateFilter[0].shoppingCartId, cart);
             this.setState({
-                shoppingcartid: this.props.updateFilter[0].shoppingCardId,
+                shoppingcartid: this.props.updateFilter[0].shoppingCartId,
                 productsid: this.props.productid,
                 userid: this.props.userid,
                 quantity:  this.props.updateFilter[0].quantity,
