@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductTable from '../ProductTable/productTable';
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 import useForm from "../useForm";
 import axios from "axios";
-
 const ReviewsModal = (props) => {
     const {values, handleChange, handleSubmit} = useForm(submitReview);
     const [show, setShow] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    const [reviews, setReviews] = useState();
+    const [filteredReview, setFilteredReview] = useState();
+    useEffect (() =>{
+      getReviews();
+    }, []); 
     async function submitReview() {
         let review = {...values};
         try {
@@ -27,13 +31,26 @@ const ReviewsModal = (props) => {
     }
     async function getReviews() {
         try {
-            await axios.get(`https://localhost:44394/api/reviews/`);
+          let response = await axios.get(`https://localhost:44394/api/reviews/reviews`);
+            setReviews (response.data)
+            console.log(response.data);
+            this.filterReviews(props.productid);
         }
         catch(err){
             alert(err);
             return
         }
-
+    async function filterReviews (productid) {
+      let filtered = reviews.filter(review => review.productId).includes(productid)
+      console.log(filtered);
+      setFilteredReview(filtered);
+    }
+    let reviews = filteredReview.map((review) => {
+      return <tr key={review.ReviewId}>
+        <td>{review.description}</td>
+        <td>{review.rating}</td>
+      </tr>
+    })
     }
     return (
         <>
@@ -49,6 +66,17 @@ const ReviewsModal = (props) => {
                         <Form.Control type="text" placeholder="Enter review for this product" onChange={handleChange} value={values.description} required={true}/>
                     </Form>
                     //Insert Reviews for product here
+                    <Table className="reviewTable">
+                      <thead>
+                        <tr>
+                          <th>Reviews</th>
+                          <th>Rating</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {reviews}
+                      </tbody>
+                    </Table>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
@@ -60,5 +88,4 @@ const ReviewsModal = (props) => {
         </>
     );
 }
-
 export default ReviewsModal;

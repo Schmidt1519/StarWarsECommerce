@@ -4,6 +4,7 @@ import ProductTable from "../ProductTable/productTable";
 import ViewCart from "../ShoppingCart/viewCart";
 import NavbarHome from "../Navbar/navbar"
 import SearchBar from "../SearchBar/searchBar";
+import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 
 
 function HomePage(props) {
@@ -12,15 +13,16 @@ function HomePage(props) {
         <React.Fragment>
             <div>
             <NavbarHome />
-            <h1>Welcome {props.user.userName}!</h1>
+            <br/>
+            <Alert variant="success">Welcome {props.user.userName}!</Alert>
             </div>
             <div>
                 <SearchBar filterProductTable={props.filterProductTable} products={props.productTable}/>
             </div>
             <div>
-                <button onClick={() => {
+                <Button variant="secondary" onClick={() => {
                     props.showCart();
-                }}>View Cart</button>
+                }}>View Cart</Button>
                 {props.cartVisible?(
                     <ViewCart userProducts={props.userProducts} getCartProducts={props.getCartProducts} 
                     cartProducts={props.cartProducts} filterCart={props.filterCart}

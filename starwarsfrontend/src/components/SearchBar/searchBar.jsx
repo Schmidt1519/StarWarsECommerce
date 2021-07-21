@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import HomePage from '../HomePage/homepage';
+import { Form, Button, Row, Col } from "react-bootstrap";
 
 class SearchBar extends Component {
     constructor(props) {
@@ -23,11 +24,19 @@ class SearchBar extends Component {
     render() {
         return(
             <div>
-            <form className="search-bar"  onSubmit={(event) => this.handleSubmit(event)}>
-                    <input type="text" name="searchQuery" className="search-form" placeholder="Search"
+            <Form.Group className="mb-3" controlId="formBasicRegister">
+            <Form onSubmit={(event) => this.handleSubmit(event)}>
+            <Row>
+            <Col>
+            <Form.Control type="text" name="searchQuery" className="search-form" placeholder="Search for anything Star Wars"
                     onChange={this.handleChange} value={this.searchQuery} />
-                    <button className="btn btn-primary" type="submit">Submit </button>
-            </form>
+                    </Col>
+                    <Col>
+                    <Button className="btn btn-primary" type="submit">Search</Button>
+                    </Col>
+                    </Row>
+            </Form>
+            </Form.Group>
             </div>
         )
     }

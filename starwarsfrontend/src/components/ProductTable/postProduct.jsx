@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import NavbarHome from "../Navbar/navbar"
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -79,6 +80,11 @@ class PostProduct extends Component {
     render() {
         return (
             <>
+            <NavbarHome />
+            <br/>
+                <h2>
+                Add a new product
+                </h2>
                 <Form className="addProduct" onSubmit={(event) => this.handleSubmit(event)}>
                     <Form.Group controlId="name">
                         <Form.Label>Name</Form.Label>
@@ -114,7 +120,7 @@ class PostProduct extends Component {
                                       onChange={this.handleChange} value={this.state.category}/>
                     </Form.Group>
                     {this.state.errors.category ? <p style={{color: 'red'}}>{this.state.errors.category}</p> : ''}
-
+                    <br/>
                     <Button variant="primary" type="submit">Create Listing</Button>
                 </Form>
             </>
