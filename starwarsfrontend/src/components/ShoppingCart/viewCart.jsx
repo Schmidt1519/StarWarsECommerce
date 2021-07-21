@@ -13,15 +13,11 @@ function ViewCart(props){
     else {
         let carts = props.filterCart.map((cart) => {
             return <tr key={cart.id}>
+                <td>{cart.productName}</td>
+                <td>{cart.productDesc}</td>
+                <td>{cart.productPrice}</td>
             <td>{cart.quantity}</td>
             <DeleteFromCart cartid={cart.shoppingCartId} deleteFromCart={props.deleteFromCart}/>
-                </tr>
-        });
-        let products = props.userProducts.map((product) => {
-            return <tr key={product.id}>
-                <td>{product.name}</td>
-                <td>{product.description}</td>
-                <td>{product.price}</td>       
                 </tr>
         });
         return(
@@ -29,21 +25,9 @@ function ViewCart(props){
                 <div>
                 <Table className="cartTable">
                     <thead>
-                        <tr>
-                        <th>Name</th>
+                        <tr><th>Name</th>
                             <th>Description</th>
                             <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products}
-                    </tbody>
-                </Table>
-                </div>
-                <div>
-                <Table className="cartTable">
-                    <thead>
-                        <tr>
                             <th>Quantity</th>
                         </tr>
                     </thead>

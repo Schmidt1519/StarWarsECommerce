@@ -19,7 +19,6 @@ export class App extends Component {
           productTable: [],
           categories: [],
           cartProducts: [],
-          products: [],
           visible: false,
           loggedIn: false,
           cart: [],
@@ -140,22 +139,6 @@ export class App extends Component {
     }
 
 // SHOPPING CART FUNCTIONS
-    getCartProducts = async (id) => {
-      try{
-        let response = await axios.get(`https://localhost:44394/api/products/${id}`);
-        if (response === undefined) {
-            this.setState({});
-        } else {
-            this.setState({
-              cartProducts: response.data
-            });
-            this.state.products.push(this.state.cartProducts);
-          }
-      }
-      catch(err) {
-        console.log(err);
-      }
-    };
 
     createCart = async (cart) => {
       let response = await axios.post('https://localhost:44394/api/cart', cart);
@@ -206,7 +189,6 @@ export class App extends Component {
           console.log(this.state.allCarts.userId);
           this.filterCart();
           this.productIdToList();
-          this.getProducts();
         }
       }
       catch(err) {
@@ -219,11 +201,11 @@ export class App extends Component {
     this.setState({
       filterCart: filtered
     })
-    console.log(this.state.filterCart[0].productsId);
+    console.log(this.state.filterCart[0].productId);
     }
 
     updateFilterCart = (productId) => {
-      let filtered = this.state.filterCart.filter(cart => cart.productsId === productId)
+      let filtered = this.state.filterCart.filter(cart => cart.productId === productId)
       this.setState({
         updateFilter: filtered
       })
@@ -232,19 +214,11 @@ export class App extends Component {
 
     productIdToList =() => {
       let productIds = this.state.filterCart.map((product) => 
-        (product.productsId));
+        (product.productId));
       this.setState({
         filterProductId: productIds,
       });
-      console.log(this.state.filterProductId);
-    }
-
-    getProducts = () => {
-      for (let i = 0; i < this.state.filterProductId.length; i++){
-        this.getCartProducts(this.state.filterProductId[i]);
-        console.log(this.state.cartProducts)
-      }
-      console.log(this.state.products)
+      console.log(productIds);
     }
 
     showForm = () => {
