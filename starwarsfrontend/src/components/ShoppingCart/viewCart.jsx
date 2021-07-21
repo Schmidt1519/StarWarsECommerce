@@ -21,8 +21,7 @@ function ViewCart(props){
             return <tr key={product.id}>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
-                <td>{product.price}</td>
-                
+                <td>{product.price}</td>       
                 </tr>
         });
         return(

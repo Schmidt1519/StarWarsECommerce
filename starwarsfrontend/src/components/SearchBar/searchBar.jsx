@@ -7,18 +7,11 @@ class SearchBar extends Component {
             this.state = {
                 searchQuery: '',
             }
-            // this.handleChange = this.handleChange.bind(this);
-            this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange = (event) => {
         this.setState({ 
             searchQuery: event.target.value
-        // }, function(){
-        //     let search = this.props.productTable.filter(prod => 
-        //         prod.name.includes(this.props.searchQuery))
-        //         // || prod.category.includes(this.props.searchQuery))
-        //     this.props.filterProductsTable(search)
         })
     }
 
@@ -36,10 +29,6 @@ class SearchBar extends Component {
                     <button className="btn btn-primary" type="submit">Submit </button>
             </form>
             </div>
-            // <div>
-            //     <label>Search: </label>
-            //     <input type="text" value={this.state.searchQuery} onChange={this.handleChange}/> 
-            // </div>
         )
     }
 }   

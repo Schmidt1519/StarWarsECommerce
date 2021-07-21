@@ -3,11 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
-<<<<<<< HEAD:eCommerceStarterCode/Migrations/20210719220350_init.cs
-    public partial class init : Migration
-=======
-    public partial class initmigration : Migration
->>>>>>> a9b667744ccc7ffd8ceee82b5226126cbf7db225:eCommerceStarterCode/Migrations/20210720003324_initmigration.cs
+    public partial class initljs : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -238,20 +234,12 @@ namespace eCommerceStarterCode.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-<<<<<<< HEAD:eCommerceStarterCode/Migrations/20210719220350_init.cs
-                values: new object[] { "a22fc8e5-acfc-4e3a-b939-83a2ebd9c8bd", "b52223b8-35ee-41cb-9203-09ec0d35a96f", "User", "USER" });
-=======
-                values: new object[] { "8f294be9-eb98-460a-b295-63cdb63a9771", "9c965f8f-b891-4a21-9109-46ed3be102ca", "User", "USER" });
->>>>>>> a9b667744ccc7ffd8ceee82b5226126cbf7db225:eCommerceStarterCode/Migrations/20210720003324_initmigration.cs
+                values: new object[] { "5c632cc4-cb7c-4e83-af8d-370e0c4fb2ef", "9bed497d-0795-4e6f-978a-7892c8f5b850", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-<<<<<<< HEAD:eCommerceStarterCode/Migrations/20210719220350_init.cs
-                values: new object[] { "d90a1731-ea6e-418a-b51d-201d2dd00adf", "a8b91619-c0a9-4077-b805-ff0ef19ae65b", "Admin", "ADMIN" });
-=======
-                values: new object[] { "931f2c9d-f32b-4792-af6b-0a292ad9e61d", "37e8c167-fd6e-4bb3-a764-7f9e7c4e4173", "Admin", "ADMIN" });
->>>>>>> a9b667744ccc7ffd8ceee82b5226126cbf7db225:eCommerceStarterCode/Migrations/20210720003324_initmigration.cs
+                values: new object[] { "4c4aa8aa-7514-466c-82bc-228f52c223d5", "37afee6d-b1bf-43d8-802b-8c55205f1a8f", "Admin", "ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

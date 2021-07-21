@@ -25,10 +25,11 @@ export class App extends Component {
           cart: [],
           allCarts: [],
           filterCart: [],
-          updateFilterCart: [],
+          updateFilter: [],
           filterProductId: [],
           cartVisible: false,
-          // searchQuery: [],
+          reviewById: [],
+          newReview: [],
         };
     }
 
@@ -100,7 +101,6 @@ export class App extends Component {
         else {
             this.setState({
                 productTable: response.data
-                // searchQuery: response.data
             });
             console.log(this.state.productTable);
           }
@@ -130,20 +130,14 @@ export class App extends Component {
     filterProductTable = (searchQuery) => {
       console.log(this.state.productTable);
       const productFilter = this.state.productTable.filter(prod => 
-        prod.name.includes(searchQuery) || 
-        prod.category.includes(searchQuery) 
+        prod.name.toLowerCase().includes(searchQuery) || 
+        prod.category.toLowerCase().includes(searchQuery) 
       )
       console.log(productFilter);
       this.setState({
         productTable: productFilter
       })
     }
-
-    // filterProductTable = (searchQuery) => {
-    //   this.setState({
-    //     productTable: searchQuery
-    //   })
-    // }
 
 // SHOPPING CART FUNCTIONS
     getCartProducts = async (id) => {
@@ -155,7 +149,6 @@ export class App extends Component {
             this.setState({
               cartProducts: response.data
             });
-            // console.log(this.state.cartProducts);
             this.state.products.push(this.state.cartProducts);
           }
       }
@@ -177,7 +170,7 @@ export class App extends Component {
     }
 
     updateCart = async (id, cart) => {
-      let response = await axios.post(`https://localhost:44394/api/cart/update/${id}`, cart);
+      let response = await axios.put(`https://localhost:44394/api/cart/update/${id}/`, cart);
       if (response === undefined){
             this.setState({
             });
@@ -191,7 +184,6 @@ export class App extends Component {
     deleteFromCart = async (id) => {
       try{
         await axios.delete(`https://localhost:44394/api/cart/remove/${id}/`)
-        await this.getAllCarts();
       }
       catch(err) {
         console.log(err);
@@ -224,7 +216,6 @@ export class App extends Component {
 
     filterCart = () => {
       let filtered = this.state.allCarts.filter(cart => cart.userId.includes(this.state.user.id))
-    //console.log(this.state.userid);  // test
     this.setState({
       filterCart: filtered
     })
@@ -232,16 +223,16 @@ export class App extends Component {
     }
 
     updateFilterCart = (productId) => {
-      let filtered = this.state.filterCart.filter(cart => cart.productsId.includes(productId))
+      let filtered = this.state.filterCart.filter(cart => cart.productsId === productId)
       this.setState({
-        updateFilterCart: filtered
+        updateFilter: filtered
       })
-      console.log(this.state.filterCart.updateFilterCart);
+      console.log(filtered);
     }
 
     productIdToList =() => {
       let productIds = this.state.filterCart.map((product) => 
-        ({productsId: product.productsId}));
+        (product.productsId));
       this.setState({
         filterProductId: productIds,
       });
@@ -250,14 +241,11 @@ export class App extends Component {
 
     getProducts = () => {
       for (let i = 0; i < this.state.filterProductId.length; i++){
-        this.getCartProducts(this.state.filterProductId[i].productsId);
-        console.log(this.state.cartProducts) 
+        this.getCartProducts(this.state.filterProductId[i]);
+        console.log(this.state.cartProducts)
       }
       console.log(this.state.products)
     }
-
-// REVIEW FUNCTIONS
-    // createReview function
 
     showForm = () => {
         this.setState({
@@ -270,6 +258,35 @@ export class App extends Component {
         cartVisible: !this.state.cartVisible,
       });
     };
+
+// REVIEW FUNCTIONS
+    reviewById = async (id) => {
+      try{
+        let response = await axios.get(`https://localhost:44394/api/reviews/${id}`);
+        if (response === undefined) {
+            this.setState({});
+        } else {
+            this.setState({
+              reviewById: response.data
+            });
+          }
+      }
+      catch(err) {
+        console.log(err);
+      }
+    };
+
+    createReview = async (review) => {
+      let response = await axios.post('https://localhost:44394/api/reviews/create/', review);
+      if (response === undefined){
+            this.setState({
+            });
+        }else{
+          this.setState({
+            newReview: response.data
+        });
+        }
+    }
 
     render() {
       return (
@@ -298,10 +315,12 @@ export class App extends Component {
                     cartVisible={this.state.cartVisible} userProducts={this.state.products}
                   getCartProducts={this.getCartProducts} cartProducts={this.state.cartProducts}
                   filterCart={this.state.filterCart} filterProductTable={this.filterProductTable}
-                  deleteFromCart={this.deleteFromCart}/>
+                  deleteFromCart={this.deleteFromCart} reviewById={this.reviewById}
+                  newReview={this.createReview} updateFilterCart={this.updateFilterCart}
+                  updateFilter={this.state.updateFilter} filteredProductId={this.state.filterProductId}
+                  updateCart={this.updateCart} />
               }
             }}/>
-
           </Switch>
         </div>
         </Container>

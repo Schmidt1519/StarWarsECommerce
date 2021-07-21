@@ -4,6 +4,7 @@ class ShoppingCart extends Component {
     constructor(props){
         super(props);
         this.state = {
+            shoppingcartid: 0,
             productsid: 0,
             userid: '',
             quantity: 0,
@@ -11,6 +12,7 @@ class ShoppingCart extends Component {
     }
 
     handleChange = (event) => {
+        this.filter();
         this.setState({
             [event.target.name]: event.target.value
         });
@@ -25,14 +27,31 @@ class ShoppingCart extends Component {
             userid: this.props.userid,
             quantity: number,
         }
-        
-        console.log(cart);
-        this.props.createCart(cart);
-        this.setState({
+            this.productIdCheck(cart);   
+    }
+
+    productIdCheck = (cart) => {
+        if(this.props.filteredProductId.includes(cart.productsid)){
+            this.props.updateFilterCart(cart.productsid);
+            this.props.updateCart(this.props.updateFilter[0].shoppingCartId, cart);
+            this.setState({
+                shoppingcartid: this.props.updateFilter[0].shoppingCartId,
+                productsid: this.props.productid,
+                userid: this.props.userid,
+                quantity:  this.props.updateFilter[0].quantity,
+            });
+        }else{
+            this.props.createCart(cart);
+            this.setState({
             productsid: 0,
             userid: '',
             quantity: 0,
-        });
+            });
+        }
+    }
+
+    filter = () => {
+        this.props.updateFilterCart(this.props.productid);
     }
 
     render(){
@@ -47,4 +66,5 @@ class ShoppingCart extends Component {
         );
     }
 }
+
 export default ShoppingCart;

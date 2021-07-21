@@ -1,10 +1,13 @@
 ﻿using eCommerceStarterCode.Data;
+using eCommerceStarterCode.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Controllers
@@ -56,13 +59,21 @@ namespace eCommerceStarterCode.Controllers
             return StatusCode(201, value);
         }
 
-        [HttpPut("update/{id:int}")]
-        public IActionResult PostProduct(int id, [FromBody] Models.ShoppingCart value)
+        [HttpPut("update/{shoppingCartId}")]
+        public IActionResult EditShoppingCart(int shoppingCartId, [FromBody] ShoppingCart value)
         {
-            var cart = _context.ShoppingCarts.Find(id);
-            _context.ShoppingCarts.Update(value);
+            var userId = User.FindFirst("id");
+            var cart = _context.ShoppingCarts.Find(shoppingCartId);
+            if (cart == null)
+            {
+                return NotFound();
+            }
+            cart.ShoppingCartId = cart.ShoppingCartId;
+            cart.ProductsId = value.ProductsId;
+            cart.UserId = value.UserId;
+            cart.Quantity = cart.Quantity += value.Quantity;
             _context.SaveChanges();
-            return StatusCode(201, cart);
+            return Ok(cart);
         }
     }
 }

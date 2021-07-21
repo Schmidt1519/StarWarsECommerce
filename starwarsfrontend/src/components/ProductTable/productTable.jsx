@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import homepage from "../HomePage/homepage";
 import ShoppingCart from "../ShoppingCart/shoppingCart";
 import ViewCart from "../ShoppingCart/viewCart";
+import ReviewsModal from "../Reviews/reviews";
 
 function ProductTable(props) {
     if (props.products === undefined) {
@@ -20,7 +21,10 @@ function ProductTable(props) {
                 <td>{product.price}</td>
                 <td>{product.rating}</td>
                 <td>{product.category}</td>
-                <ShoppingCart productid={product.productId} userid={props.user.id} createCart={props.createCart}/>
+                <ReviewsModal productid={product.productId} products={props.productTable} />
+                <ShoppingCart productid={product.productId} userid={props.user.id} createCart={props.createCart}
+                updateFilterCart={props.updateFilterCart} updateFilter={props.updateFilter}
+                filteredProductId={props.filteredProductId} updateCart={props.updateCart}/>
             </tr>
         })
         return (

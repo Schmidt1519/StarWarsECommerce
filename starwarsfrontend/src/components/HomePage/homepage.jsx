@@ -5,6 +5,7 @@ import ViewCart from "../ShoppingCart/viewCart";
 import NavbarHome from "../Navbar/navbar"
 import SearchBar from "../SearchBar/searchBar";
 
+
 function HomePage(props) {
     console.log(props)
     return (
@@ -23,11 +24,14 @@ function HomePage(props) {
                 {props.cartVisible?(
                     <ViewCart userProducts={props.userProducts} getCartProducts={props.getCartProducts} 
                     cartProducts={props.cartProducts} filterCart={props.filterCart}
-                    deleteFromCart={props.deleteFromCart}/>
+                    deleteFromCart={props.deleteFromCart} />
                 ):null}
             </div>
             <div className="productTable">
-                 <ProductTable products={props.products} user={props.user} createCart={props.createCart}/>
+                 <ProductTable products={props.products} user={props.user} createCart={props.createCart}
+                 reviewById={props.reviewById} newReview={props.createReview} updateFilterCart={props.updateFilterCart}
+                 updateFilter={props.updateFilter} filteredProductId={props.filteredProductId}
+                 updateCart={props.updateCart} />
             </div>
         </React.Fragment>
     )
