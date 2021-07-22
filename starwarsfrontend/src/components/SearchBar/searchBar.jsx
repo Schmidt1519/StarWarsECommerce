@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import HomePage from '../HomePage/homepage';
 import { Form, Button, Row, Col } from "react-bootstrap";
 
 class SearchBar extends Component {

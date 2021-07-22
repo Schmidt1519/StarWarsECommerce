@@ -31,6 +31,7 @@ function ViewCart(props){
                             <th>Description</th>
                             <th>Price</th>
                             <th>Quantity</th>
+                            <th>Remove</th>
                         </tr>
                     </thead>
                     <tbody>

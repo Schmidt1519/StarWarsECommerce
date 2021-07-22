@@ -1,9 +1,6 @@
-import React, { Component} from "react";
+import React from "react";
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
-import homepage from "../HomePage/homepage";
 import ShoppingCart from "../ShoppingCart/shoppingCart";
-import ViewCart from "../ShoppingCart/viewCart";
 import ReviewsModal from "../Reviews/reviews";
 
 function ProductTable(props) {
@@ -21,10 +18,10 @@ function ProductTable(props) {
                 <td>{product.price}</td>
                 <td>{product.averageRating}</td>
                 <td>{product.category}</td>
-                <ReviewsModal productid={product.productId} product={product} />
-                <ShoppingCart productid={product.productId} userid={props.user.id} createCart={props.createCart}
+                <td><ReviewsModal productid={product.productId} product={product} /></td>
+                <td><ShoppingCart productid={product.productId} userid={props.user.id} createCart={props.createCart}
                 updateFilterCart={props.updateFilterCart} updateFilter={props.updateFilter}
-                filteredProductId={props.filteredProductId} updateCart={props.updateCart}/>
+                filteredProductId={props.filteredProductId} updateCart={props.updateCart}/></td>
             </tr>
         })
         return (
@@ -37,6 +34,8 @@ function ProductTable(props) {
                             <th>Price</th>
                             <th>Avg Rating</th>
                             <th>Category</th>
+                            <th>Reviews</th>
+                            <th>Qty</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -48,14 +48,5 @@ namespace eCommerceStarterCode.Controllers
             _context.SaveChanges();
             return StatusCode(201, value);
         }
-
-        // GET all reviews
-        [HttpGet("reviews")]
-        public IActionResult GetAllReviews()
-        {
-            // Retrieve all reviews from database
-            var reviews = _context.Reviews.ToList();
-            return Ok(reviews);
-        }
     }
 }

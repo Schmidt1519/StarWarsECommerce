@@ -167,7 +167,7 @@ class ReviewsModal extends Component{
         })
         return(
                 <>
-            <Button variant="primary" onClick={this.handleShow}>
+            <Button variant="outline-primary" onClick={this.handleShow}>
                 Reviews
             </Button>
             <Modal show={this.state.show} onHide={this.handleClose}>
@@ -179,6 +179,7 @@ class ReviewsModal extends Component{
                         <Form.Control type="text" name='Description' placeholder="Enter Your Review Here" value={this.state.Description} onChange={this.handleChange} required={true}/>
                         <Form.Label>Rate this product 1-5</Form.Label>
                         <Form.Control type="number" name='rating' onChange={this.handleChange} defaultValue={this.state.rating} required={true}/>
+                        <br/>
                         <Button type="submit">Submit</Button>
                     </Form>
                     <Table className="reviewTable">

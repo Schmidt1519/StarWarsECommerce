@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button } from "react-bootstrap";
+import { Button, Form, Col, Row } from "react-bootstrap";
 
 class ShoppingCart extends Component {
     constructor(props){
@@ -58,11 +58,16 @@ class ShoppingCart extends Component {
     render(){
         return(
             <div>
-                <form onSubmit ={this.handleSubmit}>
-                    <label>Quantity:  </label>
-                    <input type='number' name='quantity' onChange={this.handleChange} value={this.state.quantity}/>
-                    <input type='submit' value='Add'/>
-                </form>
+                <Form onSubmit ={this.handleSubmit}>
+                    <Row>
+                    <Col>
+                    <Form.Control type='number' name='quantity' onChange={this.handleChange} value={this.state.quantity}/>
+                    </Col>
+                    <Col>
+                    <Button variant="outline-success" type='submit'>Add</Button>
+                    </Col>
+                    </Row>
+                </Form>
             </div>
         );
     }

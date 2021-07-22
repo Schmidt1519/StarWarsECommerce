@@ -268,26 +268,26 @@ export class App extends Component {
         <Container>
         <div>
           <Switch>
-              <Route path='/post' render={props => <ProductListingPage {...props}getProducts = {this.getProducts}/>}/>
+            <Route path='/post' render={props => <ProductListingPage {...props}getProducts = {this.getProducts}/>}/>
             <Route path='/' render={props =>{
               if(this.state.loggedIn === false){
                 return (
                 <div>
                   <div>
                     <Card border="warning">
-    <Card.Header>Star Wars ECommerce</Card.Header>
-    <Card.Body>
-      <Card.Title>You must be registered to continue</Card.Title>
-      <Card.Text>
-      <Button variant="outline-primary" onClick={() => {
+                    <Card.Header>Star Wars ECommerce</Card.Header>
+                    <Card.Body>
+                      <Card.Title>You must be registered to continue</Card.Title>
+                      <Card.Text>
+                      <Button variant="outline-primary" onClick={() => {
                       this.showForm();
                     }}>Register</Button><br/>
                       {this.state.visible? (
                       <Registration register={this.register}/>
                     ):null}
-      </Card.Text>
-    </Card.Body>
-  </Card><br/>
+                    </Card.Text>
+                  </Card.Body>
+                </Card><br/>
                   </div>
                   <Login {...props} login={this.login} currentUser={this.getCurrentUser}/>
                 </div>
