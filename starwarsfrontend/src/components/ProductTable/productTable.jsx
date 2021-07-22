@@ -16,12 +16,12 @@ function ProductTable(props) {
         console.log(props);
         let products = props.products.map((product) => {
             return <tr key={product.id}>
-            <td>{product.name}</td>
+                <td>{product.name}</td>
                 <td>{product.description}</td>
                 <td>{product.price}</td>
-                <td>{product.rating}</td>
+                <td>{product.averageRating}</td>
                 <td>{product.category}</td>
-                <ReviewsModal productid={product.productId} products={props.productTable} />
+                <ReviewsModal productid={product.productId} product={product} />
                 <ShoppingCart productid={product.productId} userid={props.user.id} createCart={props.createCart}
                 updateFilterCart={props.updateFilterCart} updateFilter={props.updateFilter}
                 filteredProductId={props.filteredProductId} updateCart={props.updateCart}/>
@@ -35,7 +35,7 @@ function ProductTable(props) {
                             <th>Name</th>
                             <th>Description</th>
                             <th>Price</th>
-                            <th>Rating</th>
+                            <th>Avg Rating</th>
                             <th>Category</th>
                         </tr>
                     </thead>

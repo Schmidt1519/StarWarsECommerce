@@ -5,7 +5,6 @@ import ViewCart from "../ShoppingCart/viewCart";
 import NavbarHome from "../Navbar/navbar"
 import SearchBar from "../SearchBar/searchBar";
 
-
 function HomePage(props) {
     console.log(props)
     return (

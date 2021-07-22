@@ -20,6 +20,15 @@ namespace eCommerceStarterCode.Controllers
             _context = context;
         }
 
+        // GET all reviews
+        [HttpGet("reviews")]
+        public IActionResult GetAllReviews()
+        {
+            // Retrieve all reviews from database
+            var reviews = _context.Reviews.ToList();
+            return Ok(reviews);
+        }
+
         [HttpGet("{id:int}")]
 
         public IActionResult GetReviews(int id)

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
-    public partial class initljs : Migration
+    public partial class ljsinit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,7 +57,7 @@ namespace eCommerceStarterCode.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<float>(type: "real", nullable: false),
-                    AverageRating = table.Column<int>(type: "int", nullable: false),
+                    AverageRating = table.Column<double>(type: "float", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -222,12 +222,12 @@ namespace eCommerceStarterCode.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "a69898c8-f234-4e9b-85c9-8e40adba6d9a", "d5dc139b-dc60-4718-af53-00c7b8dd3650", "User", "USER" });
+                values: new object[] { "8a47a5a9-6a21-4ebf-9b49-d7019d7db71b", "115c62cc-2d2d-439b-9c9a-7d2e2b92655d", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "a1e264e7-997f-4572-9e15-c09c4c61a74f", "3ae2eb27-7158-4109-bd12-ac18fab514e2", "Admin", "ADMIN" });
+                values: new object[] { "4d989cc7-091f-4d95-8c2b-d1acc2cd304a", "93676a18-a054-495c-bfb4-f3acabc2696b", "Admin", "ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

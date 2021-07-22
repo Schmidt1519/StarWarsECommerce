@@ -1,4 +1,5 @@
 ﻿using eCommerceStarterCode.Data;
+using eCommerceStarterCode.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -46,6 +47,25 @@ namespace eCommerceStarterCode.Controllers
             _context.Products.Add(value);
             _context.SaveChanges();
             return StatusCode(201, value);
+        }
+
+        [HttpPut("rating/{productId}")]
+
+        public IActionResult EditRating(int productId, [FromBody] Product value)
+        {
+            var rating = _context.Products.Find(productId);
+            if (rating == null)
+            {
+                return NotFound();
+            }
+            rating.ProductId = rating.ProductId;
+            rating.Name = rating.Name;
+            rating.Description = rating.Description;
+            rating.Price = rating.Price;
+            rating.AverageRating = value.AverageRating;
+            rating.Category = rating.Category;
+            _context.SaveChanges();
+            return Ok(rating);
         }
     }
 }

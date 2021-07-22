@@ -12,7 +12,7 @@ namespace eCommerceStarterCode.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public float Price { get; set; }
-        public int AverageRating { get; set; }
+        public double AverageRating { get; set; }
         public string Category { get; set; }
         public ICollection<ShoppingCart> ShoppingCarts { get; set; }
     }

@@ -48,15 +48,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a69898c8-f234-4e9b-85c9-8e40adba6d9a",
-                            ConcurrencyStamp = "d5dc139b-dc60-4718-af53-00c7b8dd3650",
+                            Id = "8a47a5a9-6a21-4ebf-9b49-d7019d7db71b",
+                            ConcurrencyStamp = "115c62cc-2d2d-439b-9c9a-7d2e2b92655d",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "a1e264e7-997f-4572-9e15-c09c4c61a74f",
-                            ConcurrencyStamp = "3ae2eb27-7158-4109-bd12-ac18fab514e2",
+                            Id = "4d989cc7-091f-4d95-8c2b-d1acc2cd304a",
+                            ConcurrencyStamp = "93676a18-a054-495c-bfb4-f3acabc2696b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -173,8 +173,8 @@ namespace eCommerceStarterCode.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AverageRating")
-                        .HasColumnType("int");
+                    b.Property<double>("AverageRating")
+                        .HasColumnType("float");
 
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
