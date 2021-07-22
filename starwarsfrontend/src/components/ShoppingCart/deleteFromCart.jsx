@@ -1,12 +1,13 @@
 import React from 'react';
+import { Button } from "react-bootstrap";
 
 function DeleteFromCart(props){
     console.log(props)   // test
     
     return(
         <td>
-            <button type="button" onClick={() =>
-                props.deleteFromCart(props.cartid)}>Remove</button>
+            <Button variant="danger" type="button" onClick={() =>
+                props.deleteFromCart(props.cartid)}>Remove</Button>
         </td>
     )
 }

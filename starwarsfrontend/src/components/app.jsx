@@ -5,8 +5,9 @@ import {Route, Switch, Link, Redirect} from 'react-router-dom';
 import Login from "./Login/login";
 import Registration from "./Registration/registration";
 import HomePage from "./HomePage/homepage";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Alert, Card } from "react-bootstrap";
 import ProductListingPage from "./ProductTable/ProductListingPage";
+import "./app.css"
 
 export class App extends Component {
     constructor(props){
@@ -266,7 +267,6 @@ export class App extends Component {
       return (
         <Container>
         <div>
-          <h1>STAR WARS</h1>
           <Switch>
               <Route path='/post' render={props => <ProductListingPage {...props}getProducts = {this.getProducts}/>}/>
             <Route path='/' render={props =>{
@@ -274,12 +274,20 @@ export class App extends Component {
                 return (
                 <div>
                   <div>
-                    <Button variant="outline-primary" onClick={() => {
+                    <Card border="warning">
+    <Card.Header>Star Wars ECommerce</Card.Header>
+    <Card.Body>
+      <Card.Title>You must be registered to continue</Card.Title>
+      <Card.Text>
+      <Button variant="outline-primary" onClick={() => {
                       this.showForm();
-                    }}>Register</Button>
+                    }}>Register</Button><br/>
                       {this.state.visible? (
                       <Registration register={this.register}/>
                     ):null}
+      </Card.Text>
+    </Card.Body>
+  </Card><br/>
                   </div>
                   <Login {...props} login={this.login} currentUser={this.getCurrentUser}/>
                 </div>

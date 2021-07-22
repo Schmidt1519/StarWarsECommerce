@@ -90,7 +90,6 @@ class ReviewsModal extends Component{
             return
         }
     }
-
     getReviews = async () => {
         try {
           let response = await axios.get(`https://localhost:44394/api/reviews/reviews`);
@@ -182,7 +181,6 @@ class ReviewsModal extends Component{
                         <Form.Control type="number" name='rating' onChange={this.handleChange} defaultValue={this.state.rating} required={true}/>
                         <Button type="submit">Submit</Button>
                     </Form>
-
                     <Table className="reviewTable">
                       <thead>
                         <tr>
@@ -206,4 +204,4 @@ class ReviewsModal extends Component{
     }
 }
 
-export default ReviewsModal;
+export default ReviewsModal;      
